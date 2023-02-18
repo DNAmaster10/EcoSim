@@ -18,7 +18,7 @@ public class Level {
     //The size of the grid where cells can be placed
     public static int gridWidth;
     public static int gridHeight;
-    //The size of the UI
+    //The size of the Ui
     public static int uiWidth = 100;
     public static int uiHeight = 800;
 
@@ -28,8 +28,10 @@ public class Level {
     public static Jaylib.Color[] cellColours = new Jaylib.Color[5];
     //An array of boolean values indicating whether or not the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
     public static boolean[] placeableCells = new boolean[5];
+    //An integer indicating the ammount of cells which are placeable
+    public static int totalPlaceableCells;
 
-    //An integer indicating the window x where the UI starts.
+    //An integer indicating the window x where the Ui starts.
     public static int uiXStart = windowWidth - uiWidth;
 
     public static String getCellNameById(int id) {

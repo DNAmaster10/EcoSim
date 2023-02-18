@@ -3,11 +3,9 @@ package draw;
 import Level.Cells.*;
 import Level.Level;
 import Level.Terrain;
+import Level.UI.Ui;
 import com.raylib.Jaylib;
 import Level.Player;
-import Level.UI;
-
-import java.awt.*;
 
 import static com.raylib.Jaylib.*;
 
@@ -55,11 +53,12 @@ public class Draw {
         //Draw scroll
 
         //Draw buttons
-        int xButtonOffset = UI.properties.scrollWheelWidth;
-        int yButtonOffset = UI.properties.uiMenuScrollOffset;
-        int buttonWidth = UI.properties.selectBoxWidth;
-        for (int i = 0; i < UI.properties.cellSelectButtons.length; i++) {
-
+        int xButtonOffset = Ui.properties.scrollWheelWidth;
+        int yButtonOffset = Ui.properties.uiMenuScrollOffset;
+        int buttonWidth = Ui.properties.selectBoxWidth;
+        for (int i = 0; i < Ui.properties.cellSelectButtons.length; i++) {
+            DrawRectangleRec(Ui.properties.cellSelectButtons[i].rectangle, WHITE);
+            DrawText(Ui.properties.cellSelectButtons[i].cellName,(int) Ui.properties.cellSelectButtons[i].rectangle.x(), (int) Ui.properties.cellSelectButtons[i].rectangle.y(), 10, BLACK);
         }
     }
 }

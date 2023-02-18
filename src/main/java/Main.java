@@ -1,7 +1,6 @@
 import Level.Level;
+import Level.UI.Ui;
 import draw.Draw;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 import static Level.Level.*;
 import static Level.RegisterCells.registerCells;
@@ -16,6 +15,7 @@ public class Main {
         SetTargetFPS(30);
         registerCells();
         generate(windowGridWidth, windowGridHeight, cellWidth, cellHeight);
+        Ui.generateUi();
 
         while (!WindowShouldClose()) {
             BeginDrawing();
