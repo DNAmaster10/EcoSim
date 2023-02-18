@@ -21,15 +21,20 @@ public class Level {
     //The size of the UI
     public static int uiWidth = 100;
     public static int uiHeight = 800;
+
     //An array containing the names of cells with their index corresponding to their cell id.
     public static String[] cellNames = new String[5];
     //An array of colours where the index of the colour matches the cells id
     public static Jaylib.Color[] cellColours = new Jaylib.Color[5];
     //An array of boolean values indicating whether or not the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
     public static boolean[] placeableCells = new boolean[5];
+
     //An integer indicating the window x where the UI starts.
     public static int uiXStart = windowWidth - uiWidth;
 
+    public static String getCellNameById(int id) {
+        return(cellNames[id]);
+    }
 
     public static void doMainTick() {
         Terrain.resetUpdateStatus();

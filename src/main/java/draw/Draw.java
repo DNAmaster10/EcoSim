@@ -5,6 +5,7 @@ import Level.Level;
 import Level.Terrain;
 import com.raylib.Jaylib;
 import Level.Player;
+import Level.UI;
 
 import java.awt.*;
 
@@ -51,6 +52,14 @@ public class Draw {
             DrawRectangleLinesEx(placementRect, 1.0f, LIGHTGRAY);
         }
         //Draw placement menu
+        //Draw scroll
 
+        //Draw buttons
+        int xButtonOffset = UI.properties.scrollWheelWidth;
+        int yButtonOffset = UI.properties.uiMenuScrollOffset;
+        int buttonWidth = UI.properties.selectBoxWidth;
+        for (int i = 0; i < UI.properties.cellSelectButtons.length; i++) {
+
+        }
     }
 }
