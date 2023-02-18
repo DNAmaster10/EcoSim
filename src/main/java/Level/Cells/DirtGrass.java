@@ -5,11 +5,14 @@ import Level.Terrain;
 import com.raylib.Jaylib;
 
 import java.util.concurrent.ThreadLocalRandom;
-public class Grass {
+public class DirtGrass {
     public static class properties {
-        private static int growthRate = 5;
+        private static int growthRate = 20;
         private static int growthRateMax = 1000;
         private static int growthRateMin = 0;
+        public static int erosionResistance = 900;
+        public static int erosionResistanceMin = 0;
+        public static int erosionResistanceMax = 1000;
         public static Jaylib.Color color = new Jaylib.Color(33, 120, 22, 255);
     }
     public static void tickCell(int x, int y) {
