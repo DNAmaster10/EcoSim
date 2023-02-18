@@ -4,6 +4,7 @@ import Level.Level;
 import Level.Terrain;
 import Level.Player;
 import Level.UI.Ui;
+import Level.Paint;
 
 import static com.raylib.Raylib.*;
 
@@ -13,12 +14,12 @@ public class HandleInputs {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             if (!(GetMouseX() > Level.windowGridWidth)) {
                 int[] coords = Level.getGridPos(GetMouseX(), GetMouseY());
-                Terrain.drawRectangleTerrain(coords[0], coords[1], Player.placementCellType, Player.placementRectSize);
+                Paint.paint(coords[0], coords[1], Player.placementRectSize, Player.placementCellType);
             }
         }
         else if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
             int [] coords = Level.getGridPos(GetMouseX(), GetMouseY());
-            Terrain.drawRectangleTerrain(coords[0], coords[1], 4, Player.placementRectSize);
+            Paint.paint(coords[0], coords[1], Player.placementRectSize, 4);
         }
         //Change type check
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() > Level.windowGridWidth) {

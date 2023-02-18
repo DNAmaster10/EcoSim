@@ -23,13 +23,14 @@ public class Level {
     public static int uiHeight = 800;
 
     //An array containing the names of cells with their index corresponding to their cell id.
-    public static String[] cellNames = new String[5];
+    public static String[] cellNames = new String[6];
     //An array of colours where the index of the colour matches the cells id
-    public static Jaylib.Color[] cellColours = new Jaylib.Color[5];
+    public static Jaylib.Color[] cellColours = new Jaylib.Color[6];
     //An array of boolean values indicating whether or not the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
-    public static boolean[] placeableCells = new boolean[5];
+    public static boolean[] placeableCells = new boolean[6];
     //An integer indicating the ammount of cells which are placeable
     public static int totalPlaceableCells;
+    //A 2D array indicating the total ammount of
 
     //An integer indicating the window x where the Ui starts.
     public static int uiXStart = windowWidth - uiWidth;

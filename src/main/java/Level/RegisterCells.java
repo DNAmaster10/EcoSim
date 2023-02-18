@@ -1,6 +1,7 @@
 package Level;
 
 import Level.Cells.*;
+import com.raylib.Jaylib;
 
 public class RegisterCells {
     public static void registerCells() {
@@ -28,5 +29,10 @@ public class RegisterCells {
         Level.cellNames[4] = "Empty";
         Level.cellColours[4] = Empty.properties.color;
         Level.placeableCells[4] = false;
+
+        //Grass
+        Level.cellNames[5] = "Grass";
+        Level.cellColours[5] = new Jaylib.Color(17, 145, 52, 255);
+        Level.placeableCells[5] = true;
     }
 }

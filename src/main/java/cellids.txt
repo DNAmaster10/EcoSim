@@ -1,5 +1,15 @@
+Registering new cell steps:
+- Create a class for the cell under Level.Cells
+- Add a properties class which must contain at least a Jaylib color called "color"
+- If the cell interacts with other cells, add those interactions to the cell class. Look at another cell class for an example
+- If the cells gets interacted with by other cells, edit the classes for those other cells to have those interactions
+- Add the cell to the Draw class
+- Add the cell to RegisterCells class and specify whether the cell should be put in the menu or not
+- Add the cell to Paint class if applies
+
 Water:      0
 Dirt:       1
 DirtGrass:  2
 BeachSand:  3
 Empty:      4
+Grass:      5 - Layered

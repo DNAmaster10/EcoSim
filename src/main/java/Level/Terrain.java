@@ -53,18 +53,4 @@ public class Terrain {
             }
         }
     }
-
-    public static void drawRectangleTerrain(int x, int y, int cellType, int size) {
-        //First calculate the top left corner of the rectangle
-        int[] topLeft = new int[2];
-        topLeft[0] = x - size;
-        topLeft[1] = y - size;
-        for (int currentX = 0; currentX < (size * 2) + 1; currentX++) {
-            for (int currentY = 0; currentY < (size * 2) + 1; currentY++) {
-                if (checkCellExists(topLeft[0] + currentX, topLeft[1] + currentY)) {
-                    setCell(topLeft[0] + currentX, topLeft[1] + currentY, cellType);
-                }
-            }
-        }
-    }
 }
