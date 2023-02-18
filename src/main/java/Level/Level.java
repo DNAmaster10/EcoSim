@@ -4,8 +4,6 @@ import Level.Cells.DirtGrass;
 import Level.Cells.Ocean;
 import com.raylib.Jaylib;
 
-import java.util.List;
-
 public class Level {
     public static int windowHeight = 800;
     public static int windowWidth = 800;
@@ -26,11 +24,11 @@ public class Level {
     public static String[] cellNames = new String[6];
     //An array of colours where the index of the colour matches the cells id
     public static Jaylib.Color[] cellColours = new Jaylib.Color[6];
-    //An array of boolean values indicating whether or not the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
+    //An array of boolean values indicating the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
     public static boolean[] placeableCells = new boolean[6];
-    //An integer indicating the ammount of cells which are placeable
+    //An integer indicating the amount of cells which are placeable
     public static int totalPlaceableCells;
-    //A 2D array indicating the total ammount of
+    //A 2D array indicating the total amount of
 
     //An integer indicating the window x where the Ui starts.
     public static int uiXStart = windowWidth - uiWidth;

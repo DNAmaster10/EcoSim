@@ -1,6 +1,5 @@
 package Level.Cells;
 
-import Level.Terrain;
 import com.raylib.Jaylib;
 
 public class Dirt {

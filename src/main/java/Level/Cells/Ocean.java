@@ -1,21 +1,18 @@
 package Level.Cells;
 
-import Level.Level;
 import Level.Terrain;
 import com.raylib.Jaylib;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static java.lang.System.exit;
-
 public class Ocean {
     public static class properties {
-        private static int erosionRate = 10;
-        private static int erosionRateMax = 1000;
-        private static int erosionRateMin = 0;
-        private static int floodRate = 100;
-        private static int floodRateMin = 0;
-        private static int floodRateMax = 1000;
+        private static final int erosionRate = 10;
+        private static final int erosionRateMax = 1000;
+        private static final int erosionRateMin = 0;
+        private static final int floodRate = 100;
+        private static final int floodRateMin = 0;
+        private static final int floodRateMax = 1000;
         public static Jaylib.Color color = new Jaylib.Color(15, 78, 150, 255);
     }
     public static void tickCell(int x, int y) {
@@ -51,7 +48,15 @@ public class Ocean {
                     }
                     break;
                 case 2:
-
+                    if (properties.erosionRate != properties.erosionRateMin && DirtGrass.properties.erosionResistance != DirtGrass.properties.erosionResistanceMax) {
+                        int chance = ThreadLocalRandom.current().nextInt(properties.erosionRateMin, properties.erosionRateMax + 1);
+                        if (chance <= properties.erosionRate) {
+                            chance = ThreadLocalRandom.current().nextInt(DirtGrass.properties.erosionResistanceMin, DirtGrass.properties.erosionResistanceMax + 1);
+                            if (chance >= DirtGrass.properties.erosionResistance) {
+                                Terrain.setCell(x, y, 3);
+                            }
+                        }
+                    }
                     break;
                 case 4:
                     if (properties.floodRate != properties.floodRateMin) {

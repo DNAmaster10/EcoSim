@@ -1,7 +1,5 @@
 package Level;
 
-import com.raylib.Jaylib;
-
 public class Player {
     //The brush size
     public static int placementRectSize = 2;

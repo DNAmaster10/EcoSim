@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Terrain {
-    public static List<List<Integer>> cells = new ArrayList<List<Integer>>();
-    public static List<List<Boolean>> cellUpdateStatus = new ArrayList<List<Boolean>>();
+    public static List<List<Integer>> cells = new ArrayList<>();
+    public static List<List<Boolean>> cellUpdateStatus = new ArrayList<>();
 
     public static void generate(int windowGridWidth, int windowGridHeight, int cellWidth, int cellHeight) {
         // 0 is water
@@ -20,8 +20,8 @@ public class Terrain {
 
         //Generate terrain
         for (int i = 0; i < Level.gridWidth; i++) {
-            cells.add(new ArrayList<Integer>());
-            cellUpdateStatus.add(new ArrayList<Boolean>());
+            cells.add(new ArrayList<>());
+            cellUpdateStatus.add(new ArrayList<>());
             for (int j = 0; j < Level.gridHeight; j++) {
                 cells.get(i).add(4);
                 cellUpdateStatus.get(i).add(false);

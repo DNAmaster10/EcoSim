@@ -1,7 +1,6 @@
 package controls;
 
 import Level.Level;
-import Level.Terrain;
 import Level.Player;
 import Level.UI.Ui;
 import Level.Paint;

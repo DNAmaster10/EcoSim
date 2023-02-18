@@ -7,9 +7,9 @@ import com.raylib.Jaylib;
 import java.util.concurrent.ThreadLocalRandom;
 public class DirtGrass {
     public static class properties {
-        private static int growthRate = 20;
-        private static int growthRateMax = 1000;
-        private static int growthRateMin = 0;
+        private static final int growthRate = 20;
+        private static final int growthRateMax = 1000;
+        private static final int growthRateMin = 0;
         public static int erosionResistance = 900;
         public static int erosionResistanceMin = 0;
         public static int erosionResistanceMax = 1000;

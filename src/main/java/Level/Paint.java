@@ -1,8 +1,5 @@
 package Level;
 
-import java.util.Arrays;
-import java.util.stream.IntStream;
-
 public class Paint {
     public static void paint(int x, int y, int size, int cellType) {
         //Check if specified cell needs to be layered or painted

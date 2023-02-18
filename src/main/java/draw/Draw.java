@@ -10,7 +10,6 @@ import Level.Player;
 import static com.raylib.Jaylib.*;
 
 public class Draw {
-    private static Jaylib.Rectangle placementRect;
 
     public static void drawTerrain() {
         ClearBackground(BLUE);
@@ -46,7 +45,7 @@ public class Draw {
         //Draw placement rectangle below mouse. This is drawn inline with the grid.
         if (Player.drawPlacementRect && GetMouseX() < Level.uiXStart) {
             int[] gridPos = Level.getGridPos(GetMouseX(), GetMouseY());
-            placementRect = new Jaylib.Rectangle((Level.cellWidth * gridPos[0]) - (Player.placementRectSize * Level.cellWidth), (Level.cellHeight * gridPos[1]) - (Player.placementRectSize * Level.cellHeight), ((Player.placementRectSize * 2) + 1) * Level.cellWidth, ((Player.placementRectSize * 2) + 1) * Level.cellHeight);
+            Jaylib.Rectangle placementRect = new Jaylib.Rectangle((Level.cellWidth * gridPos[0]) - (Player.placementRectSize * Level.cellWidth), (Level.cellHeight * gridPos[1]) - (Player.placementRectSize * Level.cellHeight), ((Player.placementRectSize * 2) + 1) * Level.cellWidth, ((Player.placementRectSize * 2) + 1) * Level.cellHeight);
             DrawRectangleLinesEx(placementRect, 1.0f, LIGHTGRAY);
         }
         //Draw placement menu
