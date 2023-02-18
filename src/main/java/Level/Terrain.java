@@ -7,7 +7,7 @@ public class Terrain {
     public static List<List<Integer>> cells = new ArrayList<List<Integer>>();
     public static List<List<Boolean>> cellUpdateStatus = new ArrayList<List<Boolean>>();
 
-    public static void generate(int windowWidth, int windowHeight, int cellWidth, int cellHeight) {
+    public static void generate(int windowGridWidth, int windowGridHeight, int cellWidth, int cellHeight) {
         // 0 is water
         // 1 is land
         // 2 is grass
@@ -15,8 +15,8 @@ public class Terrain {
         // 4 is empty
 
         //Calculate grid size
-        Level.gridWidth = windowWidth / cellWidth;
-        Level.gridHeight = windowHeight / cellHeight;
+        Level.gridWidth = windowGridWidth / cellWidth;
+        Level.gridHeight = windowGridHeight / cellHeight;
 
         //Generate terrain
         for (int i = 0; i < Level.gridWidth; i++) {

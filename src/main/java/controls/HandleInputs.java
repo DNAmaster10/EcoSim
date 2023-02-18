@@ -17,5 +17,15 @@ public class HandleInputs {
             int [] coords = Level.getGridPos(GetMouseX(), GetMouseY());
             Terrain.drawRectangleTerrain(coords[0], coords[1], 0, Player.placementRectSize);
         }
+        //Scroll wheel
+        if (GetMouseWheelMove() > 0) {
+            Player.placementRectSize = Player.placementRectSize + Math.round(GetMouseWheelMove());
+        }
+        else if (GetMouseWheelMove() < 0) {
+            Player.placementRectSize = Player.placementRectSize + Math.round(GetMouseWheelMove());
+            if (Player.placementRectSize < 0) {
+                Player.placementRectSize = 0;
+            }
+        }
     }
 }
