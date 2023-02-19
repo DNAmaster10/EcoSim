@@ -19,6 +19,10 @@ public class Draw {
 
     public static void drawTerrain() {
         ClearBackground(BLUE);
+        Raylib.Rectangle grassSourceRect = new Jaylib.Rectangle(0, 0, 10, 10);
+        Raylib.Rectangle destRect = new Jaylib.Rectangle();
+        Raylib.Vector2 textureVector = new Jaylib.Vector2().x(0f).y(0f);
+
         for (int x = 0; x < Level.gridWidth; x++) {
             for (int y = 0; y < Level.gridHeight; y++) {
                 switch (Terrain.getCell(x, y)) {
@@ -32,13 +36,9 @@ public class Draw {
                         break;
                     case 2:
                         //DirtGrass
-                        Raylib.Rectangle sourceRect = new Jaylib.Rectangle(0, 0, 10, 10);
-                        Raylib.Rectangle destRect = new Jaylib.Rectangle(Level.cellWidth * x, Level.cellHeight * y, Level.cellWidth, Level.cellHeight);
-                        Raylib.Vector2 vector = new Jaylib.Vector2();
-                        vector.x(0);
-                        vector.y(0);
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
 
-                        Jaylib.DrawTexturePro(DirtGrass.properties.texture, sourceRect, destRect, vector, 0f, WHITE);
+                        Jaylib.DrawTexturePro(DirtGrass.properties.texture, grassSourceRect, destRect, textureVector, 0f, WHITE);
                         break;
                     case 3:
                         //BeachSand
@@ -55,14 +55,20 @@ public class Draw {
     public static void drawGridUi() {
         //Draw placement rectangle below mouse. This is drawn inline with the grid.
         if (Player.drawPlacementRect && GetMouseX() < Level.uiXStart) {
-            int[] gridPos = Level.getGridPos(GetMouseX(), GetMouseY());
+            Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+            int[] gridPos = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
             Jaylib.Rectangle placementRect = new Jaylib.Rectangle((Level.cellWidth * gridPos[0]) - (Player.placementRectSize * Level.cellWidth), (Level.cellHeight * gridPos[1]) - (Player.placementRectSize * Level.cellHeight), ((Player.placementRectSize * 2) + 1) * Level.cellWidth, ((Player.placementRectSize * 2) + 1) * Level.cellHeight);
             DrawRectangleLinesEx(placementRect, 1.0f, LIGHTGRAY);
         }
     }
     public static void drawOverlayUi() {
         DrawFPS(10, 10);
-        DrawText(GetMouseX() + "," + GetMouseY() + "   " + Player.playerZoom, 30, 0, 10, WHITE);
+        Raylib.Vector2 screenToWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+        DrawText("WindowPos: " + GetMouseX() + "," + GetMouseY() +
+                "\n   Zoom: " + Player.playerZoom +
+                "\n   CameraOffset: " + Player.cameraOffset +
+                "\n   CameraTarget: " + Player.camera.target() +
+                "\n   ScreenToWorld: " + screenToWorld.x() + "," + screenToWorld.y(), 30, 0, 10, WHITE);
         //Draw placement menu
         //Draw scroll
 

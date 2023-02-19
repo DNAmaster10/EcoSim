@@ -19,23 +19,18 @@ public class Main {
         generate(windowGridWidth, windowGridHeight, cellWidth, cellHeight);
         Ui.generateUi();
         Textures.loadTextures();
-        Camera2D camera = new Camera2D(0);
         Jaylib.Vector2 cameraTarget = new Jaylib.Vector2();
         cameraTarget.x(0.0f).y(0.0f);
-        camera.target(cameraTarget);
-        camera.offset().y(0.1f).x(0.1f);
-        camera.zoom(1.0f);
-        camera.rotation(0.0f);
+        Player.camera.target(cameraTarget);
+        Player.camera.offset().y(0f).x(0f);
+        Player.camera.zoom(1.0f);
+        Player.camera.rotation(0.0f);
 
         while (!WindowShouldClose()) {
-            float playerZoom = Player.playerZoom;
-            camera.zoom(playerZoom);
-            cameraTarget.x(Player.playerX).y(Player.playerY);
+            Level.doMainTick();
             BeginDrawing();
-
-            BeginMode2D(camera);
-                Level.doMainTick();
-                HandleInputs.mainInputCheck();
+            HandleInputs.mainInputCheck();
+            BeginMode2D(Player.camera);
                 Draw.drawTerrain();
                 Draw.drawGridUi();
             EndMode2D();

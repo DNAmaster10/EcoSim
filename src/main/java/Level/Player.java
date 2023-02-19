@@ -1,5 +1,8 @@
 package Level;
 
+import com.raylib.Jaylib;
+import com.raylib.Raylib;
+
 public class Player {
     //The brush size
     public static int placementRectSize = 2;
@@ -13,9 +16,12 @@ public class Player {
     public static String placementText = "Ocean";
 
     //Camera
+    public static Raylib.Camera2D camera = new Raylib.Camera2D(0);
+
     //An integer indicating the x of the camera
     public static float playerX = 10f;
     public static float playerY = 10f;
+    public static Raylib.Vector2 cameraOffset = new Jaylib.Vector2().y(0f).y(0f);
     public static float playerZoom = 1f;
 
 
@@ -30,11 +36,22 @@ public class Player {
     //Camera methods
     public static void changeZoom(float zoomChange) {
         int roundedZoomChange = Math.round(zoomChange);
-        if (!(Player.playerZoom + roundedZoomChange < 1)) {
+        //Zoom in and out
+        if (!(Player.playerZoom + roundedZoomChange <= 1)) {
+            //Reset camera
             Player.playerZoom += roundedZoomChange;
+            Raylib.Vector2 mouseWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+            Player.cameraOffset = Raylib.GetMousePosition();
+            Player.camera.offset(Raylib.GetMousePosition());
+            Player.camera.target(mouseWorldPos);
         }
         else {
             Player.playerZoom = 1f;
+            Player.cameraOffset.x(0f).y(0f);
+            Player.camera.offset(Player.cameraOffset);
+            Player.camera.target().x(0f).y(0f);
         }
+        //Relocate camera to where player zoomed
+        Player.camera.zoom(Player.playerZoom);
     }
 }

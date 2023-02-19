@@ -4,6 +4,7 @@ import Level.Level;
 import Level.Player;
 import Level.UI.Ui;
 import Level.Paint;
+import com.raylib.Raylib;
 
 import static com.raylib.Raylib.*;
 
@@ -12,12 +13,14 @@ public class HandleInputs {
         //Mouse button
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             if (!(GetMouseX() > Level.windowGridWidth)) {
-                int[] coords = Level.getGridPos(GetMouseX(), GetMouseY());
+                Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+                int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
                 Paint.paint(coords[0], coords[1], Player.placementRectSize, Player.placementCellType);
             }
         }
         else if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
-            int [] coords = Level.getGridPos(GetMouseX(), GetMouseY());
+            Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+            int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
             Paint.paint(coords[0], coords[1], Player.placementRectSize, 4);
         }
         //Change type check

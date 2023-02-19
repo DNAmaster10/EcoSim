@@ -3,6 +3,7 @@ package Level;
 import Level.Cells.DirtGrass;
 import Level.Cells.Ocean;
 import com.raylib.Jaylib;
+import com.raylib.Raylib;
 
 public class Level {
     public static int windowHeight = 800;
@@ -44,8 +45,8 @@ public class Level {
     public static int[] getGridPos(int x, int y) {
         //Calculates the grid pos of a given x and y taking into account zoom
         int[] returnArray = new int[2];
-        returnArray[0] = (x / Level.cellWidth) / Math.round(Player.playerZoom);
-        returnArray[1] = (y / Level.cellHeight) / Math.round(Player.playerZoom);
+        returnArray[0] = x / Level.cellWidth;
+        returnArray[1] = y / Level.cellHeight;
         return (returnArray);
     }
     public static void doUpdateTick() {
