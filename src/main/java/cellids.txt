@@ -6,6 +6,7 @@ Registering new cell steps:
 - Add the cell to the Draw class
 - Add the cell to RegisterCells class and specify whether the cell should be put in the menu or not
 - Add the cell to Paint class if applies
+- Update the load texture class
 
 Water:      0
 Dirt:       1

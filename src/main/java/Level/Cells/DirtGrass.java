@@ -3,6 +3,8 @@ package Level.Cells;
 import Level.Level;
 import Level.Terrain;
 import com.raylib.Jaylib;
+import static com.raylib.Jaylib.WHITE;
+import static com.raylib.Raylib.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 public class DirtGrass {
@@ -14,6 +16,7 @@ public class DirtGrass {
         public static int erosionResistanceMin = 0;
         public static int erosionResistanceMax = 1000;
         public static Jaylib.Color color = new Jaylib.Color(33, 120, 22, 255);
+        public static Texture texture;
     }
     public static void tickCell(int x, int y) {
         //Grow

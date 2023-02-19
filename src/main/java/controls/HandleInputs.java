@@ -29,13 +29,24 @@ public class HandleInputs {
             }
         }
         //Scroll wheel
-        if (GetMouseWheelMove() > 0 && GetMouseX() < Level.uiXStart) {
-            Player.placementRectSize = Player.placementRectSize + Math.round(GetMouseWheelMove());
+        if (!IsKeyDown(KEY_LEFT_SHIFT)) {
+            //Chance placement rect size if shift key is not pressed
+            if (GetMouseWheelMove() > 0 && GetMouseX() < Level.uiXStart) {
+                //Increase
+                Player.placementRectSize = Player.placementRectSize + Math.round(GetMouseWheelMove());
+            }
+            else if (GetMouseWheelMove() < 0 && GetMouseX() < Level.uiXStart) {
+                //Decrease
+                Player.placementRectSize = Player.placementRectSize + Math.round(GetMouseWheelMove());
+                if (Player.placementRectSize < 0) {
+                    Player.placementRectSize = 0;
+                }
+            }
         }
-        else if (GetMouseWheelMove() < 0 && GetMouseX() < Level.uiXStart) {
-            Player.placementRectSize = Player.placementRectSize + Math.round(GetMouseWheelMove());
-            if (Player.placementRectSize < 0) {
-                Player.placementRectSize = 0;
+        else {
+            //Else, change zoom
+            if (GetMouseWheelMove() != 0 && GetMouseX() < Level.uiXStart) {
+                Player.changeZoom(GetMouseWheelMove());
             }
         }
     }

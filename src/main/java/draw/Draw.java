@@ -6,6 +6,12 @@ import Level.Terrain;
 import Level.UI.Ui;
 import com.raylib.Jaylib;
 import Level.Player;
+import com.raylib.Jaylib.Color;
+import static com.raylib.Jaylib.WHITE;
+import com.raylib.Raylib;
+
+
+import java.util.concurrent.ThreadLocalRandom;
 
 import static com.raylib.Jaylib.*;
 
@@ -26,7 +32,13 @@ public class Draw {
                         break;
                     case 2:
                         //DirtGrass
-                        DrawRectangle(Level.cellWidth * x, Level.cellHeight * y, Level.cellWidth, Level.cellHeight, DirtGrass.properties.color);
+                        Raylib.Rectangle sourceRect = new Jaylib.Rectangle(0, 0, 10, 10);
+                        Raylib.Rectangle destRect = new Jaylib.Rectangle(Level.cellWidth * x, Level.cellHeight * y, Level.cellWidth, Level.cellHeight);
+                        Raylib.Vector2 vector = new Jaylib.Vector2();
+                        vector.x(0);
+                        vector.y(0);
+
+                        Jaylib.DrawTexturePro(DirtGrass.properties.texture, sourceRect, destRect, vector, 0f, WHITE);
                         break;
                     case 3:
                         //BeachSand
@@ -40,14 +52,17 @@ public class Draw {
             }
         }
     }
-    public static void drawUi() {
-        DrawFPS(10, 10);
+    public static void drawGridUi() {
         //Draw placement rectangle below mouse. This is drawn inline with the grid.
         if (Player.drawPlacementRect && GetMouseX() < Level.uiXStart) {
             int[] gridPos = Level.getGridPos(GetMouseX(), GetMouseY());
             Jaylib.Rectangle placementRect = new Jaylib.Rectangle((Level.cellWidth * gridPos[0]) - (Player.placementRectSize * Level.cellWidth), (Level.cellHeight * gridPos[1]) - (Player.placementRectSize * Level.cellHeight), ((Player.placementRectSize * 2) + 1) * Level.cellWidth, ((Player.placementRectSize * 2) + 1) * Level.cellHeight);
             DrawRectangleLinesEx(placementRect, 1.0f, LIGHTGRAY);
         }
+    }
+    public static void drawOverlayUi() {
+        DrawFPS(10, 10);
+        DrawText(GetMouseX() + "," + GetMouseY() + "   " + Player.playerZoom, 30, 0, 10, WHITE);
         //Draw placement menu
         //Draw scroll
 

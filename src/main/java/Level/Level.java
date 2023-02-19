@@ -42,9 +42,10 @@ public class Level {
         doUpdateTick();
     }
     public static int[] getGridPos(int x, int y) {
+        //Calculates the grid pos of a given x and y taking into account zoom
         int[] returnArray = new int[2];
-        returnArray[0] = x / Level.cellWidth;
-        returnArray[1] = y / Level.cellHeight;
+        returnArray[0] = (x / Level.cellWidth) / Math.round(Player.playerZoom);
+        returnArray[1] = (y / Level.cellHeight) / Math.round(Player.playerZoom);
         return (returnArray);
     }
     public static void doUpdateTick() {
