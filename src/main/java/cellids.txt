@@ -14,3 +14,5 @@ DirtGrass:  2
 BeachSand:  3
 Empty:      4
 Grass:      5 - Layered
+CloseOcean: 6
+Hill:       7

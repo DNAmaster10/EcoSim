@@ -3,6 +3,8 @@ package Level.Cells;
 import Level.Level;
 import Level.Terrain;
 import com.raylib.Jaylib;
+import com.raylib.Raylib;
+
 import static com.raylib.Jaylib.WHITE;
 import static com.raylib.Raylib.*;
 
@@ -17,6 +19,7 @@ public class DirtGrass {
         public static int erosionResistanceMax = 1000;
         public static Jaylib.Color color = new Jaylib.Color(33, 120, 22, 255);
         public static Texture texture;
+        public static Raylib.Rectangle textureRectangle = new Jaylib.Rectangle(0, 0, 10, 10);
     }
     public static void tickCell(int x, int y) {
         //Grow

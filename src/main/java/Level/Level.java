@@ -1,11 +1,14 @@
 package Level;
 
+import Level.Cells.CloseOcean;
 import Level.Cells.DirtGrass;
 import Level.Cells.Ocean;
 import com.raylib.Jaylib;
 import com.raylib.Raylib;
 
 public class Level {
+    //Simulation speed. Lower is higher speed
+    public static int simulationSpeed = 2;
     public static int windowHeight = 800;
     public static int windowWidth = 800;
     //The size of the grid on the window in regular pixels
@@ -22,11 +25,11 @@ public class Level {
     public static int uiHeight = 800;
 
     //An array containing the names of cells with their index corresponding to their cell id.
-    public static String[] cellNames = new String[6];
+    public static String[] cellNames = new String[8];
     //An array of colours where the index of the colour matches the cells id
-    public static Jaylib.Color[] cellColours = new Jaylib.Color[6];
+    public static Jaylib.Color[] cellColours = new Jaylib.Color[8];
     //An array of boolean values indicating the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
-    public static boolean[] placeableCells = new boolean[6];
+    public static boolean[] placeableCells = new boolean[8];
     //An integer indicating the amount of cells which are placeable
     public static int totalPlaceableCells;
     //A 2D array indicating the total amount of
@@ -61,6 +64,11 @@ public class Level {
                     case 2:
                         if (!(Terrain.getUpdateStatus(x, y))) {
                             DirtGrass.tickCell(x, y);
+                        }
+                        break;
+                    case 6:
+                        if (!(Terrain.getUpdateStatus(x, y))) {
+                            CloseOcean.tickCell(x, y);
                         }
                         break;
                 }

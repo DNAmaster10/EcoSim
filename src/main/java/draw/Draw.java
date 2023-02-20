@@ -6,35 +6,17 @@ import Level.Terrain;
 import Level.UI.Ui;
 import com.raylib.Jaylib;
 import Level.Player;
-import com.raylib.Jaylib.Color;
 import static com.raylib.Jaylib.WHITE;
 import com.raylib.Raylib;
-
-
-import java.util.concurrent.ThreadLocalRandom;
 
 import static com.raylib.Jaylib.*;
 
 public class Draw {
-    private static int frames = 0;
-    private static float frameOffset = 0;
+    private static Raylib.Vector2 textureVector = new Jaylib.Vector2().x(0f).y(0f);
+    private static Raylib.Rectangle destRect = new Jaylib.Rectangle();
 
     public static void drawTerrain() {
-        Raylib.Rectangle oceanSourceRect = Ocean.properties.rectangle;
-        ClearBackground(BLUE);
-        Raylib.Rectangle grassSourceRect = new Jaylib.Rectangle(0, 0, 10, 10);
-        Raylib.Rectangle destRect = new Jaylib.Rectangle();
-        Raylib.Vector2 textureVector = new Jaylib.Vector2().x(0f).y(0f);
-        if (frames / 5 > 1) {
-            frameOffset += 1;
-            Ocean.properties.rectangle.y(frameOffset * 10);
-            if (frameOffset > 4) {
-                frameOffset = 0;
-                Ocean.properties.rectangle.y(0);
-            }
-            frames = 0;
-        }
-
+        ClearBackground(BLACK);
         for (int x = 0; x < Level.gridWidth; x++) {
             for (int y = 0; y < Level.gridHeight; y++) {
                 switch (Terrain.getCell(x, y)) {
@@ -42,33 +24,42 @@ public class Draw {
                         //Ocean
                         destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
 
-                        Jaylib.DrawTexturePro(Ocean.properties.texture, oceanSourceRect, destRect, textureVector, 0f, WHITE);
+                        Jaylib.DrawTexturePro(Ocean.properties.texture, Ocean.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
                         break;
                     case 1:
                         //Dirt
-                        DrawRectangle(Level.cellWidth * x, Level.cellHeight * y, Level.cellWidth, Level.cellHeight, Dirt.properties.color);
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(Dirt.properties.texture, Dirt.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
                         break;
                     case 2:
                         //DirtGrass
                         destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
 
-                        Jaylib.DrawTexturePro(DirtGrass.properties.texture, grassSourceRect, destRect, textureVector, 0f, WHITE);
+                        Jaylib.DrawTexturePro(DirtGrass.properties.texture, DirtGrass.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
                         break;
                     case 3:
                         //BeachSand
-                        DrawRectangle(Level.cellWidth * x, Level.cellHeight * y, Level.cellWidth, Level.cellHeight, BeachSand.properties.color);
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+
+                        Jaylib.DrawTexturePro(BeachSand.properties.texture, BeachSand.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
                         break;
                     case 4:
                         //Empty
                         DrawRectangle(Level.cellWidth * x, Level.cellHeight * y, Level.cellWidth, Level.cellHeight, Empty.properties.color);
                         break;
+                    case 6:
+                        //CloseOcean
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(CloseOcean.properties.texture, CloseOcean.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
+                        break;
+                    case 7:
+                        //Hill
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(Hill.properties.texture, Hill.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
+                        break;
                 }
             }
         }
-        frames++;
-        //Unload texture rectangles
-        grassSourceRect = null;
-        oceanSourceRect = null;
     }
     public static void drawGridUi() {
         //Draw placement rectangle below mouse. This is drawn inline with the grid.
@@ -82,11 +73,6 @@ public class Draw {
     public static void drawOverlayUi() {
         DrawFPS(10, 10);
         Raylib.Vector2 screenToWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
-        DrawText("WindowPos: " + GetMouseX() + "," + GetMouseY() +
-                "\n   Zoom: " + Player.playerZoom +
-                "\n   CameraOffset: " + Player.cameraOffset +
-                "\n   CameraTarget: " + Player.camera.target() +
-                "\n   ScreenToWorld: " + screenToWorld.x() + "," + screenToWorld.y(), 30, 0, 10, WHITE);
         //Draw placement menu
         //Draw scroll
 

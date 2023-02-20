@@ -11,10 +11,13 @@ import static com.raylib.Raylib.*;
 import controls.HandleInputs;
 
 public class Main {
+    //An integer indicating the amount of frames passed in this cycle.
+    //Resets to 0 when it reaches the frame rate.
+    public static int frames = 0;
 
     public static void main(String[] args) {
         InitWindow(windowWidth, windowHeight, "Game");
-        SetTargetFPS(30);
+        SetTargetFPS(60);
         registerCells();
         generate(windowGridWidth, windowGridHeight, cellWidth, cellHeight);
         Ui.generateUi();
@@ -27,7 +30,11 @@ public class Main {
         Player.camera.rotation(0.0f);
 
         while (!WindowShouldClose()) {
-            Level.doMainTick();
+            if (frames > simulationSpeed) {
+                Level.doMainTick();
+                frames = 0;
+            }
+            Textures.doTextureTick();
             BeginDrawing();
             HandleInputs.mainInputCheck();
             BeginMode2D(Player.camera);
@@ -36,6 +43,7 @@ public class Main {
             EndMode2D();
             Draw.drawOverlayUi();
             EndDrawing();
+            frames++;
         }
     }
 }

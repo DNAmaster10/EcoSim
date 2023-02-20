@@ -34,5 +34,15 @@ public class RegisterCells {
         Level.cellNames[5] = "Grass";
         Level.cellColours[5] = new Jaylib.Color(17, 145, 52, 255);
         Level.placeableCells[5] = true;
+
+        //CloseOcean
+        Level.cellNames[6] = "Close Ocean";
+        Level.cellColours[6] = CloseOcean.properties.color;
+        Level.placeableCells[6] = true;
+
+        //Hill
+        Level.cellNames[7] = "Hill";
+        Level.cellColours[7] = Hill.properties.color;
+        Level.placeableCells[7] = true;
     }
 }
