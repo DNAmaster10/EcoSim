@@ -16,19 +16,33 @@ import java.util.concurrent.ThreadLocalRandom;
 import static com.raylib.Jaylib.*;
 
 public class Draw {
+    private static int frames = 0;
+    private static float frameOffset = 0;
 
     public static void drawTerrain() {
+        Raylib.Rectangle oceanSourceRect = Ocean.properties.rectangle;
         ClearBackground(BLUE);
         Raylib.Rectangle grassSourceRect = new Jaylib.Rectangle(0, 0, 10, 10);
         Raylib.Rectangle destRect = new Jaylib.Rectangle();
         Raylib.Vector2 textureVector = new Jaylib.Vector2().x(0f).y(0f);
+        if (frames / 5 > 1) {
+            frameOffset += 1;
+            Ocean.properties.rectangle.y(frameOffset * 10);
+            if (frameOffset > 4) {
+                frameOffset = 0;
+                Ocean.properties.rectangle.y(0);
+            }
+            frames = 0;
+        }
 
         for (int x = 0; x < Level.gridWidth; x++) {
             for (int y = 0; y < Level.gridHeight; y++) {
                 switch (Terrain.getCell(x, y)) {
                     case 0:
                         //Ocean
-                        DrawRectangle(Level.cellWidth * x, Level.cellHeight * y, Level.cellWidth, Level.cellHeight, Ocean.properties.color);
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+
+                        Jaylib.DrawTexturePro(Ocean.properties.texture, oceanSourceRect, destRect, textureVector, 0f, WHITE);
                         break;
                     case 1:
                         //Dirt
@@ -51,6 +65,10 @@ public class Draw {
                 }
             }
         }
+        frames++;
+        //Unload texture rectangles
+        grassSourceRect = null;
+        oceanSourceRect = null;
     }
     public static void drawGridUi() {
         //Draw placement rectangle below mouse. This is drawn inline with the grid.

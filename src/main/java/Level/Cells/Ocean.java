@@ -2,6 +2,7 @@ package Level.Cells;
 
 import Level.Terrain;
 import com.raylib.Jaylib;
+import com.raylib.Raylib;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,6 +15,8 @@ public class Ocean {
         private static final int floodRateMin = 0;
         private static final int floodRateMax = 1000;
         public static Jaylib.Color color = new Jaylib.Color(15, 78, 150, 255);
+        public static Raylib.Texture texture;
+        public static Raylib.Rectangle rectangle = new Jaylib.Rectangle(0, 0, 10, 10);
     }
     public static void tickCell(int x, int y) {
         //Check above
