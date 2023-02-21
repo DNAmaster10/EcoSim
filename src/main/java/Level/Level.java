@@ -1,8 +1,6 @@
 package Level;
 
-import Level.Cells.CloseOcean;
-import Level.Cells.DirtGrass;
-import Level.Cells.Ocean;
+import Level.Cells.*;
 import com.raylib.Jaylib;
 import com.raylib.Raylib;
 
@@ -24,21 +22,11 @@ public class Level {
     public static int uiWidth = 100;
     public static int uiHeight = 800;
 
-    //An array containing the names of cells with their index corresponding to their cell id.
-    public static String[] cellNames = new String[8];
-    //An array of colours where the index of the colour matches the cells id
-    public static Jaylib.Color[] cellColours = new Jaylib.Color[8];
-    //An array of boolean values indicating the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
-    public static boolean[] placeableCells = new boolean[8];
-    //An integer indicating the amount of cells which are placeable
-    public static int totalPlaceableCells;
-    //A 2D array indicating the total amount of
-
     //An integer indicating the window x where the Ui starts.
     public static int uiXStart = windowWidth - uiWidth;
 
     public static String getCellNameById(int id) {
-        return(cellNames[id]);
+        return(RegisterCells.cellNames[id]);
     }
 
     public static void doMainTick() {
@@ -69,6 +57,16 @@ public class Level {
                     case 6:
                         if (!(Terrain.getUpdateStatus(x, y))) {
                             CloseOcean.tickCell(x, y);
+                        }
+                        break;
+                    case 8:
+                        if (!(Terrain.getUpdateStatus(x, y))) {
+                            ScorchedDirt.tickCell(x, y);
+                        }
+                        break;
+                    case 9:
+                        if (!(Terrain.getUpdateStatus(x, y))) {
+                            DirtGrassFire.tickCell(x, y);
                         }
                         break;
                 }

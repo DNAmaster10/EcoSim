@@ -3,6 +3,9 @@ package Level.UI;
 import Level.Level;
 import com.raylib.Jaylib;
 import Level.UI.CellSelectButton;
+import Level.RegisterCells;
+
+import java.util.Arrays;
 
 public class Ui {
     public static class properties {
@@ -24,21 +27,21 @@ public class Ui {
         //Calculate button width
         properties.selectBoxWidth = Level.uiWidth - properties.scrollWheelWidth;
         int totalPlaceableCells = 0;
-        for (int i = 0; i < Level.placeableCells.length; i++) {
-            if (Level.placeableCells[i]) {
+        for (int i = 0; i < RegisterCells.placeableCells.length; i++) {
+            if (RegisterCells.placeableCells[i]) {
                 totalPlaceableCells++;
             }
         }
-        Level.totalPlaceableCells = totalPlaceableCells;
+        RegisterCells.totalPlaceableCells = totalPlaceableCells;
         properties.cellSelectButtons = new CellSelectButton[totalPlaceableCells];
         //Generate buttons
         int totalAddedButtons = 0;
-        for (int i = 0; i < Level.placeableCells.length; i++) {
-            if (Level.placeableCells[i]) {
+        for (int i = 0; i < RegisterCells.placeableCells.length; i++) {
+            if (RegisterCells.placeableCells[i]) {
                 CellSelectButton currentButton = new CellSelectButton();
-                currentButton.color = Level.cellColours[i];
+                currentButton.color = RegisterCells.cellColours[i];
                 currentButton.cellType = i;
-                currentButton.cellName = Level.cellNames[i];
+                currentButton.cellName = RegisterCells.cellNames[i];
                 currentButton.rectangle = new Jaylib.Rectangle();
                 currentButton.rectangle.x(Level.windowGridWidth + properties.scrollWheelWidth);
                 currentButton.rectangle.y(totalAddedButtons * properties.selectBoxHeight + (1 * totalAddedButtons));

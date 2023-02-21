@@ -20,6 +20,12 @@ public class Textures {
 
         //Hill
         Hill.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/Hill.png");
+
+        //Scorched dirt
+        ScorchedDirt.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/ScorchedDirt.png");
+
+        //DirtGrassFire
+        DirtGrassFire.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/DirtGrassFire.png");
     }
     public static void doTextureTick() {
         //Ticks frames over for textures which need to be animated
@@ -33,8 +39,14 @@ public class Textures {
             CloseOcean.tickFrame();
         }
 
+        //DirtGrassFire
+        if (DirtGrassFire.properties.frameIncrement == DirtGrassFire.properties.animationSpeed) {
+            DirtGrassFire.tickFrame();
+        }
+
         //Increments animated textures frame count
         Ocean.properties.frameIncrement++;
         CloseOcean.properties.frameIncrement++;
+        DirtGrassFire.properties.frameIncrement++;
     }
 }

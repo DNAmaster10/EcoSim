@@ -4,45 +4,70 @@ import Level.Cells.*;
 import com.raylib.Jaylib;
 
 public class RegisterCells {
+    //An integer showing the total amount of cells
+    public static int totalCells = 11;
+    //An array containing the names of cells with their index corresponding to their cell id.
+    public static String[] cellNames = new String[totalCells];
+    //An array of colours where the index of the colour matches the cells id
+    public static Jaylib.Color[] cellColours = new Jaylib.Color[totalCells];
+    //An array of boolean values indicating the cell can be placed by the player. For example, dirt grass can only be created by placing grass on top of dirt.
+    public static boolean[] placeableCells = new boolean[totalCells];
+    //An integer indicating the amount of cells which are placeable
+    public static int totalPlaceableCells;
     public static void registerCells() {
         //Ocean
-        Level.cellNames[0] = "Ocean";
-        Level.cellColours[0] = Ocean.properties.color;
-        Level.placeableCells[0] = true;
+        cellNames[0] = "Ocean";
+        cellColours[0] = Ocean.properties.color;
+        placeableCells[0] = true;
 
         //Dirt
-        Level.cellNames[1] = "Dirt";
-        Level.cellColours[1] = Dirt.properties.color;
-        Level.placeableCells[1] = true;
+        cellNames[1] = "Dirt";
+        cellColours[1] = Dirt.properties.color;
+        placeableCells[1] = true;
 
         //DirtGrass
-        Level.cellNames[2] = "Dirt Grass";
-        Level.cellColours[2] = DirtGrass.properties.color;
-        Level.placeableCells[2] = false;
+        cellNames[2] = "Dirt Grass";
+        cellColours[2] = DirtGrass.properties.color;
+        placeableCells[2] = false;
 
         //Beach sand
-        Level.cellNames[3] = "Beach Sand";
-        Level.cellColours[3] = BeachSand.properties.color;
-        Level.placeableCells[3] = true;
+        cellNames[3] = "Beach Sand";
+        cellColours[3] = BeachSand.properties.color;
+        placeableCells[3] = true;
 
         //Empty
-        Level.cellNames[4] = "Empty";
-        Level.cellColours[4] = Empty.properties.color;
-        Level.placeableCells[4] = false;
+        cellNames[4] = "Empty";
+        cellColours[4] = Empty.properties.color;
+        placeableCells[4] = false;
 
         //Grass
-        Level.cellNames[5] = "Grass";
-        Level.cellColours[5] = new Jaylib.Color(17, 145, 52, 255);
-        Level.placeableCells[5] = true;
+        cellNames[5] = "Grass";
+        cellColours[5] = new Jaylib.Color(17, 145, 52, 255);
+        placeableCells[5] = true;
 
         //CloseOcean
-        Level.cellNames[6] = "Close Ocean";
-        Level.cellColours[6] = CloseOcean.properties.color;
-        Level.placeableCells[6] = true;
+        cellNames[6] = "Close Ocean";
+        cellColours[6] = CloseOcean.properties.color;
+        placeableCells[6] = true;
 
         //Hill
-        Level.cellNames[7] = "Hill";
-        Level.cellColours[7] = Hill.properties.color;
-        Level.placeableCells[7] = true;
+        cellNames[7] = "Hill";
+        cellColours[7] = Hill.properties.color;
+        placeableCells[7] = true;
+
+        //Scorched Dirt
+        cellNames[8] = "Scorched Dirt";
+        cellColours[8] = ScorchedDirt.properties.color;
+        placeableCells[8] = true;
+
+        //Dirt Grass Fire
+        cellNames[9] = "Dirt Grass Fire";
+        cellColours[9] = new Jaylib.Color(255, 136, 0, 255);
+        placeableCells[9] = false;
+
+        //Fire
+        cellNames[10] = "Fire";
+        cellColours[10] = DirtGrassFire.properties.color;
+        placeableCells[10] = true;
     }
 }

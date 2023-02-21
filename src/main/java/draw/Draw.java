@@ -57,6 +57,16 @@ public class Draw {
                         destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
                         Jaylib.DrawTexturePro(Hill.properties.texture, Hill.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
                         break;
+                    case 8:
+                        //Scorched Dirt
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(ScorchedDirt.properties.texture, ScorchedDirt.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
+                        break;
+                    case 9:
+                        //DirtGrassFire
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(DirtGrassFire.properties.texture, DirtGrassFire.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
+                        break;
                 }
             }
         }
@@ -72,7 +82,7 @@ public class Draw {
     }
     public static void drawOverlayUi() {
         DrawFPS(10, 10);
-        Raylib.Vector2 screenToWorld = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+        Raylib.DrawText("Type: " + Player.placementCellType, 30, 30, 30, WHITE);
         //Draw placement menu
         //Draw scroll
 
