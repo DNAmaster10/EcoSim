@@ -5,29 +5,40 @@ import Level.Player;
 import Level.UI.Ui;
 import Level.Paint;
 import com.raylib.Raylib;
+import Level.LifeLayer;
 
 import static com.raylib.Raylib.*;
 
 public class HandleInputs {
     public static void mainInputCheck() {
         //Mouse button
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
-            if (!(GetMouseX() > Level.windowGridWidth)) {
+        if (!Player.lifeMode) {
+            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+                if (!(GetMouseX() > Level.windowGridWidth)) {
+                    Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+                    int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
+                    Paint.paint(coords[0], coords[1], Player.placementRectSize, Player.placementCellType);
+                }
+            } else if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
                 Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
                 int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
-                Paint.paint(coords[0], coords[1], Player.placementRectSize, Player.placementCellType);
+                Paint.paint(coords[0], coords[1], Player.placementRectSize, 4);
+            }
+            //Change type check
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() > Level.windowGridWidth) {
+                for (int i = 0; i < Ui.properties.cellSelectButtons.length; i++) {
+                    if (CheckCollisionPointRec(GetMousePosition(), Ui.properties.cellSelectButtons[i].rectangle)) {
+                        Player.setPlacementType(Ui.properties.cellSelectButtons[i].cellType);
+                    }
+                }
             }
         }
-        else if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
-            Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
-            int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
-            Paint.paint(coords[0], coords[1], Player.placementRectSize, 4);
-        }
-        //Change type check
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() > Level.windowGridWidth) {
-            for (int i = 0; i < Ui.properties.cellSelectButtons.length; i++) {
-                if (CheckCollisionPointRec(GetMousePosition(), Ui.properties.cellSelectButtons[i].rectangle)) {
-                    Player.setPlacementType(Ui.properties.cellSelectButtons[i].cellType);
+        else {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+                int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
+                if (LifeLayer.checkLifeExists(coords[0], coords[1])) {
+                    LifeLayer.setLife(coords[0], coords[1], 1);
                 }
             }
         }
@@ -51,6 +62,9 @@ public class HandleInputs {
             if (GetMouseWheelMove() != 0 && GetMouseX() < Level.uiXStart) {
                 Player.changeZoom(GetMouseWheelMove());
             }
+        }
+        if (IsKeyPressed(KEY_L)) {
+            Player.lifeMode = !Player.lifeMode;
         }
     }
 }

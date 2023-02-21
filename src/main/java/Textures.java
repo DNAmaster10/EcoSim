@@ -1,4 +1,5 @@
 import Level.Cells.*;
+import Level.Life.OakSapling;
 import com.raylib.Jaylib;
 
 public class Textures {
@@ -26,6 +27,9 @@ public class Textures {
 
         //DirtGrassFire
         DirtGrassFire.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/DirtGrassFire.png");
+
+        //OakSapling
+        OakSapling.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/OakSapling.png");
     }
     public static void doTextureTick() {
         //Ticks frames over for textures which need to be animated

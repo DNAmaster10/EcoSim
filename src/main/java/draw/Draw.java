@@ -2,12 +2,14 @@ package draw;
 
 import Level.Cells.*;
 import Level.Level;
+import Level.Life.OakSapling;
 import Level.Terrain;
 import Level.UI.Ui;
 import com.raylib.Jaylib;
 import Level.Player;
 import static com.raylib.Jaylib.WHITE;
 import com.raylib.Raylib;
+import Level.LifeLayer;
 
 import static com.raylib.Jaylib.*;
 
@@ -70,6 +72,16 @@ public class Draw {
                 }
             }
         }
+        for (int x = 0; x < Level.gridWidth; x++) {
+            for (int y = 0; y < Level.gridHeight; y++) {
+                switch(LifeLayer.getLifeType(x, y)) {
+                    case 1:
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight + 1);
+                        Jaylib.DrawTexturePro(OakSapling.properties.texture, OakSapling.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
+                        break;
+                }
+            }
+        }
     }
     public static void drawGridUi() {
         //Draw placement rectangle below mouse. This is drawn inline with the grid.
@@ -82,7 +94,7 @@ public class Draw {
     }
     public static void drawOverlayUi() {
         DrawFPS(10, 10);
-        Raylib.DrawText("Type: " + Player.placementCellType, 30, 30, 30, WHITE);
+        Raylib.DrawText("LifeLayer: " + Player.lifeMode, 30, 30, 30, WHITE);
         //Draw placement menu
         //Draw scroll
 

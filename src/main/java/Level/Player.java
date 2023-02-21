@@ -4,6 +4,7 @@ import com.raylib.Jaylib;
 import com.raylib.Raylib;
 
 public class Player {
+    public static boolean lifeMode = false;
     //The brush size
     public static int placementRectSize = 2;
     //The drawn brush size

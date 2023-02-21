@@ -9,6 +9,9 @@ import static Level.RegisterCells.registerCells;
 import static Level.Terrain.generate;
 import static com.raylib.Raylib.*;
 import controls.HandleInputs;
+import Level.LifeLayer;
+
+import java.util.Random;
 
 public class Main {
     //An integer indicating the amount of frames passed in this cycle.
@@ -34,6 +37,7 @@ public class Main {
                 Level.doMainTick();
                 frames = 0;
             }
+            LifeLayer.doLifeTick();
             Textures.doTextureTick();
             BeginDrawing();
             HandleInputs.mainInputCheck();
