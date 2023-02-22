@@ -1,35 +1,40 @@
 import Level.Cells.*;
 import Level.Life.OakSapling;
+import Level.Life.YoungOakTree;
 import com.raylib.Jaylib;
 
 public class Textures {
     public static void loadTextures() {
+        System.out.println(System.getProperty(("user.dir")));
         //DirtGrass
-        DirtGrass.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/DirtGrass.png");
+        DirtGrass.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/DirtGrass.png");
 
         //Ocean
-        Ocean.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/Ocean.png");
+        Ocean.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/Ocean.png");
 
         //BeachSand
-        BeachSand.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/BeachSand.png");
+        BeachSand.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/BeachSand.png");
 
         //CloseOcean
-        CloseOcean.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/CloseOcean.png");
+        CloseOcean.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/CloseOcean.png");
 
         //Dirt
-        Dirt.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/Dirt.png");
+        Dirt.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/Dirt.png");
 
         //Hill
-        Hill.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/Hill.png");
+        Hill.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/Hill.png");
 
         //Scorched dirt
-        ScorchedDirt.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/ScorchedDirt.png");
+        ScorchedDirt.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/ScorchedDirt.png");
 
         //DirtGrassFire
-        DirtGrassFire.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/DirtGrassFire.png");
+        DirtGrassFire.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/DirtGrassFire.png");
 
         //OakSapling
-        OakSapling.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/target/classes/OakSapling.png");
+        OakSapling.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/OakSapling.png");
+
+        //Young oak tree
+        YoungOakTree.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/YoungOakTree.png");
     }
     public static void doTextureTick() {
         //Ticks frames over for textures which need to be animated

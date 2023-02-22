@@ -79,6 +79,8 @@ public class Draw {
                         destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight + 1);
                         Jaylib.DrawTexturePro(OakSapling.properties.texture, OakSapling.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
                         break;
+                    //case 2:
+                        //destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).wid
                 }
             }
         }

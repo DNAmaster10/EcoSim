@@ -19,3 +19,10 @@ Hill:          7
 ScorchedDirt:  8
 DirtGrassFire: 9
 Fire:          10
+
+//Life
+
+Nothing:       0
+OakSapling:    1
+YoungOakTree:  2
+OakTree:       3

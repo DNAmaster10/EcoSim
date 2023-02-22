@@ -25,7 +25,7 @@ public class OakSapling {
     public static void tickThisLife(int x, int y) {
         //Check cells beneath
         switch(Terrain.getCell(x, y)) {
-            case
+            //
         }
         //Grow
         int chance = ThreadLocalRandom.current().nextInt(properties.growthRateMin, properties.growthRateMax + 1);
