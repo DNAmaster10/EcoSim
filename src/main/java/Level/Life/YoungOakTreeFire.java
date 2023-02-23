@@ -5,16 +5,25 @@ import Level.Terrain;
 import com.raylib.Jaylib;
 import com.raylib.Raylib;
 
-import java.util.concurrent.ThreadLocalRandom;
-
-public class YoungOakTree {
+public class YoungOakTreeFire {
     public static class properties {
-        private static final int growthRate = 5;
-        private static final int growthRateMax = 10000;
-        private static final int growthRateMin = 0;
-        public static Jaylib.Color color = new Jaylib.Color(49, 94, 4, 255);
+        public static Jaylib.Color color = new Jaylib.Color(166, 37, 2, 255);
         public static Raylib.Texture texture;
         public static Raylib.Rectangle textureRectangle = new Jaylib.Rectangle(0, 0, 11, 12);
+
+        //Animation
+        public static int frameIncrement = 0;
+        public static int currentAnimationFrame = 0;
+        public static int maxFrames = 2;
+        public static int animationSpeed = 10;
+    }
+    public static void tickFrame() {
+        properties.currentAnimationFrame += 1;
+        if (properties.currentAnimationFrame > properties.maxFrames) {
+            properties.currentAnimationFrame = 0;
+        }
+        properties.textureRectangle.y(properties.currentAnimationFrame * 12);
+        properties.frameIncrement = 0;
     }
     public static void tickObject(int x, int y) {
         //This life
@@ -26,27 +35,23 @@ public class YoungOakTree {
         //Check cells beneath
         boolean end = false;
         switch(Terrain.getCell(x, y)) {
+            case 1:
+            case 2:
+            case 8:
+                LifeLayer.setLife(x, y, 7);
+                end = true;
+                break;
             case 0:
             case 3:
             case 4:
             case 6:
             case 7:
-                //Remove
                 LifeLayer.setLife(x, y, 0);
-                end = true;
-                break;
-            case 9:
-                //Set on fire
-                LifeLayer.setLife(x, y, 6);
                 end = true;
                 break;
         }
         if (end) {
             return;
-        }
-        int chance = ThreadLocalRandom.current().nextInt(properties.growthRateMin, properties.growthRateMax + 1);
-        if (chance <= properties.growthRate) {
-            LifeLayer.setLife(x, y, 3);
         }
     }
 }

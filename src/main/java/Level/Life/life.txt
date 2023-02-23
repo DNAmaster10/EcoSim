@@ -1,0 +1,12 @@
+//Id's for life
+
+Nothing:           0
+OakSapling:        1
+YoungOakTree:      2
+OakTree:           3
+OakSaplingFire:    4
+BurntOakSapling:   5
+YoungOakTreeFire:  6
+BurntYoungOakTree: 7
+OakTreeFire:       8
+BurntOakTree:      9

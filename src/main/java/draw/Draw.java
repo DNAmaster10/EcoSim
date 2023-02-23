@@ -2,7 +2,7 @@ package draw;
 
 import Level.Cells.*;
 import Level.Level;
-import Level.Life.OakSapling;
+import Level.Life.*;
 import Level.Terrain;
 import Level.UI.Ui;
 import com.raylib.Jaylib;
@@ -76,11 +76,50 @@ public class Draw {
             for (int y = 0; y < Level.gridHeight; y++) {
                 switch(LifeLayer.getLifeType(x, y)) {
                     case 1:
-                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight + 1);
+                        //Oak Sapling
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 1).width(Level.cellWidth).height(Level.cellHeight + 1);
                         Jaylib.DrawTexturePro(OakSapling.properties.texture, OakSapling.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
                         break;
-                    //case 2:
-                        //destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).wid
+                    case 2:
+                        //Young oak tree
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 1).width(Level.cellWidth + 1).height(Level.cellHeight + 2);
+                        Jaylib.DrawTexturePro(YoungOakTree.properties.texture, YoungOakTree.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
+                        break;
+                    case 3:
+                        //Oak Tree
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 4).width(Level.cellWidth + 4).height(Level.cellHeight + 5);
+                        Jaylib.DrawTexturePro(OakTree.properties.texture, OakTree.properties.textureRectangle, destRect, textureVector, -1f, WHITE);
+                        break;
+                    case 4:
+                        //Burning Oak Sapling
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 1).width(Level.cellWidth).height(Level.cellHeight + 1);
+                        Jaylib.DrawTexturePro(OakSaplingFire.properties.texture, OakSaplingFire.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
+                        break;
+                    case 5:
+                        //Burnt oak sapling
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 1).width(Level.cellWidth).height(Level.cellHeight + 1);
+                        Jaylib.DrawTexturePro(BurntOakSapling.properties.texture, BurntOakSapling.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
+                        break;
+                    case 6:
+                        //Young Oak Tree Fire
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 1).width(Level.cellWidth + 1).height(Level.cellHeight + 2);
+                        Jaylib.DrawTexturePro(YoungOakTreeFire.properties.texture, YoungOakTreeFire.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
+                        break;
+                    case 7:
+                        //Burnt Young Oak Tree
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 1).width(Level.cellWidth + 1).height(Level.cellHeight + 2);
+                        Jaylib.DrawTexturePro(BurntYoungOakTree.properties.texture, BurntYoungOakTree.properties.textureRectangle, destRect, textureVector, 1f, WHITE);
+                        break;
+                    case 8:
+                        //Oak Tree Fire
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 4).width(Level.cellWidth + 4).height(Level.cellHeight + 5);
+                        Jaylib.DrawTexturePro(OakTreeFire.properties.texture, OakTreeFire.properties.textureRectangle, destRect, textureVector, -1f, WHITE);
+                        break;
+                    case 9:
+                        //Burnt Oak Tree
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 4).width(Level.cellWidth + 4).height(Level.cellHeight + 5);
+                        Jaylib.DrawTexturePro(BurntOakTree.properties.texture, BurntOakTree.properties.textureRectangle, destRect, textureVector, -1f, WHITE);
+                        break;
                 }
             }
         }
@@ -101,12 +140,20 @@ public class Draw {
         //Draw scroll
 
         //Draw buttons
-        int xButtonOffset = Ui.properties.scrollWheelWidth;
-        int yButtonOffset = Ui.properties.uiMenuScrollOffset;
-        int buttonWidth = Ui.properties.selectBoxWidth;
-        for (int i = 0; i < Ui.properties.cellSelectButtons.length; i++) {
-            DrawRectangleRec(Ui.properties.cellSelectButtons[i].rectangle, WHITE);
-            DrawText(Ui.properties.cellSelectButtons[i].cellName,(int) Ui.properties.cellSelectButtons[i].rectangle.x(), (int) Ui.properties.cellSelectButtons[i].rectangle.y(), 10, BLACK);
+        if (!Player.lifeMode) {
+            int xButtonOffset = Ui.properties.scrollWheelWidth;
+            int yButtonOffset = Ui.properties.uiMenuScrollOffset;
+            int buttonWidth = Ui.properties.selectBoxWidth;
+            for (int i = 0; i < Ui.properties.cellSelectButtons.length; i++) {
+                DrawRectangleRec(Ui.properties.cellSelectButtons[i].rectangle, WHITE);
+                DrawText(Ui.properties.cellSelectButtons[i].cellName, (int) Ui.properties.cellSelectButtons[i].rectangle.x(), (int) Ui.properties.cellSelectButtons[i].rectangle.y(), 10, BLACK);
+            }
+        }
+        else {
+            for (int i = 0; i < Ui.properties.lifeSelectButtons.length; i++) {
+                DrawRectangleRec(Ui.properties.lifeSelectButtons[i].rectangle, WHITE);
+                DrawText(Ui.properties.lifeSelectButtons[i].lifeName, (int) Ui.properties.lifeSelectButtons[i].rectangle.x(), (int) Ui.properties.lifeSelectButtons[i].rectangle.y(), 10, BLACK);
+            }
         }
     }
 }

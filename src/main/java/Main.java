@@ -10,6 +10,7 @@ import static Level.Terrain.generate;
 import static com.raylib.Raylib.*;
 import controls.HandleInputs;
 import Level.LifeLayer;
+import Level.RegisterLife;
 
 import java.util.Random;
 
@@ -22,6 +23,7 @@ public class Main {
         InitWindow(windowWidth, windowHeight, "Game");
         SetTargetFPS(60);
         registerCells();
+        RegisterLife.registerLife();
         generate(windowGridWidth, windowGridHeight, cellWidth, cellHeight);
         Ui.generateUi();
         Textures.loadTextures();

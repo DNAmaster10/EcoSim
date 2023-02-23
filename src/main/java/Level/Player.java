@@ -13,6 +13,7 @@ public class Player {
     public static boolean drawPlacementRect = true;
     //The current selected cell type
     public static int placementCellType = 0;
+    public static int placementLifeType = 3;
     //A string indicating the selected cell type
     public static String placementText = "Ocean";
 
@@ -26,12 +27,16 @@ public class Player {
     public static float playerZoom = 1f;
 
 
-    public static void setPlacementType(int cellType) {
+    public static void setPlacementCellType(int cellType) {
         //Changes the selected cell type
         placementCellType = cellType;
 
         //Get the string for the cell type
         placementText = Level.getCellNameById(cellType);
+    }
+
+    public static void setPlacementLifeType(int lifeType) {
+        placementLifeType = lifeType;
     }
 
     //Camera methods

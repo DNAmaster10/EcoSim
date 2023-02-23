@@ -28,17 +28,26 @@ public class HandleInputs {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && GetMouseX() > Level.windowGridWidth) {
                 for (int i = 0; i < Ui.properties.cellSelectButtons.length; i++) {
                     if (CheckCollisionPointRec(GetMousePosition(), Ui.properties.cellSelectButtons[i].rectangle)) {
-                        Player.setPlacementType(Ui.properties.cellSelectButtons[i].cellType);
+                        Player.setPlacementCellType(Ui.properties.cellSelectButtons[i].cellType);
                     }
                 }
             }
         }
         else {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
-                int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
-                if (LifeLayer.checkLifeExists(coords[0], coords[1])) {
-                    LifeLayer.setLife(coords[0], coords[1], 1);
+                if (!(GetMouseX() > Level.windowGridWidth)) {
+                    Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
+                    int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
+                    if (LifeLayer.checkLifeExists(coords[0], coords[1])) {
+                        LifeLayer.setLife(coords[0], coords[1], 1);
+                    }
+                }
+                else {
+                    for (int i = 0; i < Ui.properties.lifeSelectButtons.length; i++) {
+                        if (CheckCollisionPointRec(GetMousePosition(), Ui.properties.lifeSelectButtons[i].rectangle)) {
+                            Player.setPlacementLifeType(Ui.properties.lifeSelectButtons[i].lifeType);
+                        }
+                    }
                 }
             }
         }
@@ -63,6 +72,7 @@ public class HandleInputs {
                 Player.changeZoom(GetMouseWheelMove());
             }
         }
+        //Toggle life mode
         if (IsKeyPressed(KEY_L)) {
             Player.lifeMode = !Player.lifeMode;
         }

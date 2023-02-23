@@ -1,6 +1,5 @@
 import Level.Cells.*;
-import Level.Life.OakSapling;
-import Level.Life.YoungOakTree;
+import Level.Life.*;
 import com.raylib.Jaylib;
 
 public class Textures {
@@ -35,6 +34,27 @@ public class Textures {
 
         //Young oak tree
         YoungOakTree.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/YoungOakTree.png");
+
+        //Oak tree
+        OakTree.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/OakTree.png");
+
+        //Oak Sapling Fire
+        OakSaplingFire.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/OakSaplingFire.png");
+
+        //Burnt Oak Sapling
+        BurntOakSapling.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/BurntOakSapling.png");
+
+        //Young Oak Tree Fire
+        YoungOakTreeFire.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/YoungOakTreeFire.png");
+
+        //Burnt Young Oak Tree
+        BurntYoungOakTree.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/BurntYoungOakTree.png");
+
+        //Oak Tree Fire
+        OakTreeFire.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/OakTreeFire.png");
+
+        //Burnt Oak Tree
+        BurntOakTree.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/BurntOakTree.png");
     }
     public static void doTextureTick() {
         //Ticks frames over for textures which need to be animated
@@ -53,9 +73,26 @@ public class Textures {
             DirtGrassFire.tickFrame();
         }
 
+        //OakSaplingFire
+        if (OakSaplingFire.properties.frameIncrement == OakSaplingFire.properties.animationSpeed) {
+            OakSaplingFire.tickFrame();
+        }
+
+        //YoungOakTreeFire
+        if (YoungOakTreeFire.properties.frameIncrement == YoungOakTreeFire.properties.animationSpeed) {
+            YoungOakTreeFire.tickFrame();
+        }
+
+        //OakTreeFiew
+        if (OakTreeFire.properties.frameIncrement == OakTreeFire.properties.animationSpeed) {
+            OakTreeFire.tickFrame();
+        }
+
         //Increments animated textures frame count
         Ocean.properties.frameIncrement++;
         CloseOcean.properties.frameIncrement++;
         DirtGrassFire.properties.frameIncrement++;
+        OakSaplingFire.properties.frameIncrement++;
+        YoungOakTreeFire.properties.frameIncrement++;
     }
 }
