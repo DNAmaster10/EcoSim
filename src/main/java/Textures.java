@@ -83,7 +83,7 @@ public class Textures {
             YoungOakTreeFire.tickFrame();
         }
 
-        //OakTreeFiew
+        //OakTreeFire
         if (OakTreeFire.properties.frameIncrement == OakTreeFire.properties.animationSpeed) {
             OakTreeFire.tickFrame();
         }
@@ -94,5 +94,6 @@ public class Textures {
         DirtGrassFire.properties.frameIncrement++;
         OakSaplingFire.properties.frameIncrement++;
         YoungOakTreeFire.properties.frameIncrement++;
+        OakTreeFire.properties.frameIncrement++;
     }
 }

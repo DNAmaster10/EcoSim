@@ -7,11 +7,11 @@ import com.raylib.Raylib;
 public class Level {
     //Simulation speed. Lower is higher speed
     public static int simulationSpeed = 2;
-    public static int windowHeight = 800;
+    public static int windowHeight = 700;
     public static int windowWidth = 800;
     //The size of the grid on the window in regular pixels
     public static int windowGridWidth = 700;
-    public static int windowGridHeight = 800;
+    public static int windowGridHeight = 700;
     //The size of cells on the grid
     public static int cellWidth = 8;
     public static int cellHeight = 8;
