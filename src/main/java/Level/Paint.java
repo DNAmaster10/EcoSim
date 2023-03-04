@@ -43,7 +43,7 @@ public class Paint {
         topLeft[1] = y - size;
         for (int currentX = 0; currentX < (size * 2) + 1; currentX++) {
             for (int currentY = 0; currentY < (size * 2) + 1; currentY++) {
-                if (Terrain.checkCellExists(topLeft[0] + currentX, topLeft[1] + currentY)) {
+                if (Terrain.checkCell(topLeft[0] + currentX, topLeft[1] + currentY)) {
                     Terrain.setCell(topLeft[0] + currentX, topLeft[1] + currentY, cellType);
                 }
             }
@@ -56,7 +56,7 @@ public class Paint {
         topLeft[1] = y - size;
         for (int currentX = 0; currentX < (size * 2) + 1; currentX++) {
             for (int currentY = 0; currentY < (size * 2) + 1; currentY++) {
-                if (Terrain.checkCellExists(topLeft[0] + currentX, topLeft[1] + currentY) && Terrain.getCell(topLeft[0] + currentX, topLeft[1] + currentY) == fromCell) {
+                if (Terrain.checkCell(topLeft[0] + currentX, topLeft[1] + currentY) && Terrain.getCell(topLeft[0] + currentX, topLeft[1] + currentY) == fromCell) {
                     Terrain.setCell(topLeft[0] + currentX, topLeft[1] + currentY, toCell);
                 }
             }

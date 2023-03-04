@@ -36,16 +36,16 @@ public class DirtGrassFire {
             tickThisCell(x, y);
         }
         //Check above
-        if (Terrain.checkCellExists(x, y - 1) && !(Terrain.getUpdateStatus(x, y - 1))) {
+        if (Terrain.checkCell(x, y - 1) && !(Terrain.getUpdateStatus(x, y - 1))) {
             tickBorderCell(x, y - 1);
         }
-        if (Terrain.checkCellExists(x + 1, y) && !(Terrain.getUpdateStatus(x + 1, y))) {
+        if (Terrain.checkCell(x + 1, y) && !(Terrain.getUpdateStatus(x + 1, y))) {
             tickBorderCell(x + 1, y);
         }
-        if (Terrain.checkCellExists(x, y + 1) && !(Terrain.getUpdateStatus(x, y + 1))) {
+        if (Terrain.checkCell(x, y + 1) && !(Terrain.getUpdateStatus(x, y + 1))) {
             tickBorderCell(x, y + 1);
         }
-        if (Terrain.checkCellExists(x - 1, y) && !(Terrain.getUpdateStatus(x - 1, y))) {
+        if (Terrain.checkCell(x - 1, y) && !(Terrain.getUpdateStatus(x - 1, y))) {
             tickBorderCell(x - 1, y);
         }
     }

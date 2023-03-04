@@ -8,17 +8,20 @@ Registering new cell steps:
 - Add the cell to Paint class if applies
 - Update the load texture class
 
-Ocean:         0
-Dirt:          1
-DirtGrass:     2
-BeachSand:     3
-Empty:         4
-Grass:         5 - Layered
-CloseOcean:    6
-Hill:          7
-ScorchedDirt:  8
-DirtGrassFire: 9
-Fire:          10
+Ocean:                   0
+Dirt:                    1
+DirtGrass:               2
+BeachSand:               3
+Empty:                   4
+Grass:                   5 - Layered
+CloseOcean:              6
+Hill:                    7
+ScorchedDirt:            8
+DirtGrassFire:           9
+Fire:                    10
+FertileDirt:             11
+FertileDirtGrass:        12
+FertileDirtGrassFlowers: 13
 
 //Life
 

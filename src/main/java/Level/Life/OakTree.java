@@ -64,7 +64,7 @@ public class OakTree {
                                 break;
                         }
                         if (!isValid) {
-                            break;
+                            continue;
                         }
                         availablePositions.add(new int[2]);
                         availablePositions.get(amountPositions)[0] = topLeft[0] + currentX;

@@ -69,6 +69,11 @@ public class Level {
                             DirtGrassFire.tickCell(x, y);
                         }
                         break;
+                    case 12:
+                        if (!(Terrain.getUpdateStatus(x, y))) {
+                            FertileDirtGrass.tickCell(x, y);
+                        }
+                        break;
                 }
             }
         }

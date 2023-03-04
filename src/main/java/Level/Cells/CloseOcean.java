@@ -32,19 +32,19 @@ public class CloseOcean {
     }
     public static void tickCell(int x, int y) {
         //Check above
-        if (Terrain.checkCellExists(x, y - 1) && !(Terrain.getUpdateStatus(x, y - 1))) {
+        if (Terrain.checkCell(x, y - 1) && !(Terrain.getUpdateStatus(x, y - 1))) {
             tickBorderCell(x, y - 1);
         }
         //Check to right
-        if (Terrain.checkCellExists(x + 1, y) && !(Terrain.getUpdateStatus(x + 1, y))) {
+        if (Terrain.checkCell(x + 1, y) && !(Terrain.getUpdateStatus(x + 1, y))) {
             tickBorderCell(x + 1, y);
         }
         //Check below
-        if (Terrain.checkCellExists(x, y + 1) && !(Terrain.getUpdateStatus(x, y + 1))) {
+        if (Terrain.checkCell(x, y + 1) && !(Terrain.getUpdateStatus(x, y + 1))) {
             tickBorderCell(x, y + 1);
         }
         //Check to left
-        if (Terrain.checkCellExists(x - 1, y) && !(Terrain.getUpdateStatus(x - 1, y))) {
+        if (Terrain.checkCell(x - 1, y) && !(Terrain.getUpdateStatus(x - 1, y))) {
             tickBorderCell(x - 1, y);
         }
     }

@@ -69,6 +69,16 @@ public class Draw {
                         destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
                         Jaylib.DrawTexturePro(DirtGrassFire.properties.texture, DirtGrassFire.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
                         break;
+                    case 11:
+                        //FertileDirt
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(FertileDirt.properties.texture, FertileDirt.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
+                        break;
+                    case 12:
+                        //FertileDirtGrass
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(FertileDirtGrass.properties.texture, FertileDirtGrass.properties.textureRectanlge, destRect, textureVector, 0f, WHITE);
+                        break;
                 }
             }
         }

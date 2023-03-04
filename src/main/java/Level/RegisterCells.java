@@ -5,7 +5,7 @@ import com.raylib.Jaylib;
 
 public class RegisterCells {
     //An integer showing the total amount of cells
-    public static int totalCells = 11;
+    public static int totalCells = 12;
     //An array containing the names of cells with their index corresponding to their cell id.
     public static String[] cellNames = new String[totalCells];
     //An array of colours where the index of the colour matches the cells id
@@ -69,5 +69,10 @@ public class RegisterCells {
         cellNames[10] = "Fire";
         cellColours[10] = DirtGrassFire.properties.color;
         placeableCells[10] = true;
+
+        //FertileDirt
+        cellNames[11] = "Fertile Dirt";
+        cellColours[11] = FertileDirt.properties.color;
+        placeableCells[11] = true;
     }
 }

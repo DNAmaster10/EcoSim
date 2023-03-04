@@ -36,13 +36,13 @@ public class Terrain {
         //Returns an integer indicating the type of cell present
         return (cells.get(x).get(y));
     }
+    public static boolean checkCell(int x, int y) {
+        //returns a boolean indicating whether or not a cell exists (i.e not outside the grid)
+        return(y > 0 && (y < Level.gridHeight - 1) && x > 0 && x < Level.gridWidth - 1);
+    }
     public static boolean getUpdateStatus(int x, int y) {
         //Returns a boolean indicating whether the given cell has already been updated in the current tick
         return (cellUpdateStatus.get(x).get(y));
-    }
-    public static boolean checkCellExists(int x, int y) {
-        //Returns a boolean indicating whether the given cell exists (For example, if x is below 0, then it's outside the grid and doesn't exist)
-        return (!(x < 0) && !(x > Level.gridWidth - 1) && !(y < 0) && !(y > Level.gridHeight - 1));
     }
     public static void setCell(int x, int y, int cellType) {
         //Sets a cell at a given grid location
