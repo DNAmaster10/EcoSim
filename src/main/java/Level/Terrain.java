@@ -78,18 +78,44 @@ public class Terrain {
     public static void regenerate(int scale, int roughness, int minHeight, int maxHeight) {
         heightMap = HeightMap.generate(scale, roughness, minHeight, maxHeight);
         int heightMapNum;
+        int variationDifference = Player.variation / 5;
         for (int j = 0; j < Level.gridWidth; j++) {
             for (int i = 0; i < Level.gridHeight; i++) {
                 heightMapNum = heightMap[i][j];
-                if (heightMapNum < 20) {
+                if (heightMapNum < variationDifference) {
                     cells.get(i).set(j, 0);
-                } else if (heightMapNum < 30) {
+                } else if (heightMapNum < variationDifference * 2) {
                     cells.get(i).set(j, 6);
-                } else if (heightMapNum < 60) {
+                } else if (heightMapNum < variationDifference * 3) {
                     cells.get(i).set(j, 2);
-                } else if (heightMapNum < 80) {
+                } else if (heightMapNum < variationDifference * 4) {
                     cells.get(i).set(j, 12);
-                } else if (heightMapNum < 200) {
+                } else if (heightMapNum < variationDifference * 5) {
+                    cells.get(i).set(j, 7);
+                } else {
+                    cells.get(i).set(j, 7);
+                }
+                cellUpdateStatus.get(i).set(j, false);
+                LifeLayer.life.get(i).set(j, 0);
+                LifeLayer.lifeUpdateStatus.get(i).set(j, false);
+            }
+        }
+    }
+    public static void reGenerateVariation() {
+        int variationDifference = Player.variation / 5;
+        int heightMapNum;
+        for (int j = 0; j < Level.gridWidth; j++) {
+            for (int i = 0; i < Level.gridHeight; i++) {
+                heightMapNum = heightMap[i][j];
+                if (heightMapNum < variationDifference) {
+                    cells.get(i).set(j, 0);
+                } else if (heightMapNum < variationDifference * 2) {
+                    cells.get(i).set(j, 6);
+                } else if (heightMapNum < variationDifference * 3) {
+                    cells.get(i).set(j, 2);
+                } else if (heightMapNum < variationDifference * 4) {
+                    cells.get(i).set(j, 12);
+                } else if (heightMapNum < variationDifference * 5) {
                     cells.get(i).set(j, 7);
                 } else {
                     cells.get(i).set(j, 7);

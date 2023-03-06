@@ -152,7 +152,7 @@ public class Draw {
     }
     public static void drawOverlayUi() {
         DrawFPS(10, 10);
-        Jaylib.DrawText("Roughness: " + Player.roughness, 30, 30, 30, WHITE);
+        Jaylib.DrawText("Roughness: " + Player.roughness + " Vary: " + Player.variation, 30, 30, 30, WHITE);
         //Draw placement menu
         //Draw scroll
 

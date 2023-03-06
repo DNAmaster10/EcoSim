@@ -11,6 +11,7 @@ import Level.Terrain;
 import static com.raylib.Raylib.*;
 
 public class HandleInputs {
+    public static boolean wasPressed = false;
     public static void mainInputCheck() {
         //Mouse button
         if (!Player.lifeMode) {
@@ -89,14 +90,32 @@ public class HandleInputs {
         if (IsKeyPressed(KEY_G)) {
             Terrain.regenerate(9, Player.roughness, 0, 100);
         }
+
         if (IsKeyDown(KEY_N)) {
-            Player.roughness = Player.roughness - 1;
+            Player.roughness = Player.roughness - 100;
             if (Player.roughness <= 0) {
                 Player.roughness = 1;
             }
+            wasPressed = true;
         }
-        if (IsKeyDown(KEY_M)) {
-            Player.roughness = Player.roughness + 1;
+        else if (IsKeyDown(KEY_M)) {
+            Player.roughness = Player.roughness + 100;
+            wasPressed = true;
+        }
+        else if (wasPressed) {
+            wasPressed = false;
+            Terrain.regenerate(9, Player.roughness, 0, 100);
+        }
+        if (IsKeyDown(KEY_J)) {
+            Player.variation = Player.variation - Player.roughness / 100;
+            if (Player.variation < 10) {
+                Player.variation = 10;
+            }
+            Terrain.reGenerateVariation();
+        }
+        if (IsKeyDown(KEY_K)) {
+            Player.variation = Player.variation + Player.roughness / 100;
+            Terrain.reGenerateVariation();
         }
     }
 }

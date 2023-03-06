@@ -27,6 +27,7 @@ public class Player {
     public static float playerZoom = 1f;
 
     public static int roughness = 50;
+    public static int variation = 100;
 
     public static void resetCamera() {
         cameraOffset.y(0f).x(0f);
