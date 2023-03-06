@@ -13,22 +13,26 @@ public class Paint {
             case 7:
             case 8:
             case 9:
+            case 11:
                 drawRectangleTerrain(x, y, size, cellType);
                 break;
             case 5: {
                 //Grass layering
-                int[] from = new int[1];
+                int[] from = new int[2];
                 from[0] = 1;
-                int[] to = new int[1];
+                from[1] = 11;
+                int[] to = new int[2];
                 to[0] = 2;
+                to[1] = 12;
                 layerFromTo(x, y, size, from, to);
                 break;
             }
             case 10: {
                 //Fire layering
-                int[] from = new int[1];
+                int[] from = new int[2];
                 from[0] = 2;
-                int[] to = new int[1];
+                from[1] = 12;
+                int[] to = new int[2];
                 to[0] = 9;
                 layerFromTo(x, y, size, from, to);
                 break;

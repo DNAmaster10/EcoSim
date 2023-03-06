@@ -95,6 +95,28 @@ public class Ocean {
                         }
                     }
                     break;
+                case 11:
+                    if (properties.erosionRate != properties.erosionRateMin && FertileDirt.properties.erosionResistance != FertileDirt.properties.erosionResistanceMax) {
+                        int chance = ThreadLocalRandom.current().nextInt(properties.erosionRateMin, properties.erosionRateMax + 1);
+                        if (chance <= properties.erosionRate) {
+                            chance = ThreadLocalRandom.current().nextInt(FertileDirt.properties.erosionResistanceMin, FertileDirt.properties.erosionResistanceMax + 1);
+                            if (chance >= FertileDirt.properties.erosionResistance) {
+                                Terrain.setCell(x, y, 3);
+                            }
+                        }
+                    }
+                    break;
+                case 12:
+                    if (properties.erosionRate != properties.erosionRateMin && FertileDirtGrass.properties.erosionResistance != FertileDirtGrass.properties.erosionResistanceMax) {
+                        int chance = ThreadLocalRandom.current().nextInt(properties.erosionRateMin, properties.erosionRateMax + 1);
+                        if (chance <= properties.erosionRate) {
+                            chance = ThreadLocalRandom.current().nextInt(FertileDirtGrass.properties.erosionResistanceMin, FertileDirtGrass.properties.erosionResistanceMax + 1);
+                            if (chance >= FertileDirtGrass.properties.erosionResistanceMin) {
+                                Terrain.setCell(x, y, 3);
+                            }
+                        }
+                    }
+                    break;
             }
     }
 }

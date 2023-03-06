@@ -4,7 +4,7 @@ import Level.Life.*;
 import com.raylib.Jaylib;
 
 public class RegisterLife {
-    public static int totalLife = 10;
+    public static int totalLife = 11;
     public static String[] lifeNames = new String[totalLife];
     public static Jaylib.Color[] lifeColours = new Jaylib.Color[totalLife];
     public static boolean[] placeableLife = new boolean[totalLife];
@@ -59,5 +59,10 @@ public class RegisterLife {
         lifeNames[9] = "Burnt Oak Tree";
         lifeColours[9] = BurntOakTree.properties.color;
         placeableLife[9] = false;
+
+        //Bluebell
+        lifeNames[10] = "Bluebell";
+        lifeColours[10] = Bluebell.properties.color;
+        placeableLife[10] = true;
     }
 }

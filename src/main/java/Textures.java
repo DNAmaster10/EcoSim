@@ -61,6 +61,10 @@ public class Textures {
 
         //Burnt Oak Tree
         BurntOakTree.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/BurntOakTree.png");
+
+        //Bluebell
+        System.out.println("Loading bluebell");
+        Bluebell.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/Bluebell.png");
     }
     public static void doTextureTick() {
         //Ticks frames over for textures which need to be animated

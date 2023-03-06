@@ -88,6 +88,11 @@ public class LifeLayer {
                             BurntOakTree.tickObject(x, y);
                         }
                         break;
+                    case 10:
+                        if (!getUpdateStatus(x, y)) {
+                            Bluebell.tickObject(x, y);
+                        }
+                        break;
                 }
             }
         }

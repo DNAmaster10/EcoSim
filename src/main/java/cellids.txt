@@ -21,7 +21,6 @@ DirtGrassFire:           9
 Fire:                    10
 FertileDirt:             11
 FertileDirtGrass:        12
-FertileDirtGrassFlowers: 13
 
 //Life
 

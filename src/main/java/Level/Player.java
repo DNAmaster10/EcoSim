@@ -26,6 +26,13 @@ public class Player {
     public static Raylib.Vector2 cameraOffset = new Jaylib.Vector2().y(0f).y(0f);
     public static float playerZoom = 1f;
 
+    public static int roughness = 50;
+
+    public static void resetCamera() {
+        cameraOffset.y(0f).x(0f);
+        playerZoom = 1f;
+        Player.camera.rotation(0f);
+    }
 
     public static void setPlacementCellType(int cellType) {
         //Changes the selected cell type

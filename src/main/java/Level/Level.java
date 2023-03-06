@@ -18,7 +18,7 @@ public class Level {
     //The size of the grid where cells can be placed
     public static int gridWidth;
     public static int gridHeight;
-    //The size of the Ui
+    //The size of the Uir
     public static int uiWidth = 100;
     public static int uiHeight = 800;
 

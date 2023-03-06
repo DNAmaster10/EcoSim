@@ -6,32 +6,8 @@ import java.util.List;
 public class Terrain {
     public static List<List<Integer>> cells = new ArrayList<>();
     public static List<List<Boolean>> cellUpdateStatus = new ArrayList<>();
+    public static int[][] heightMap;
 
-    public static void generate(int windowGridWidth, int windowGridHeight, int cellWidth, int cellHeight) {
-        // 0 is water
-        // 1 is land
-        // 2 is grass
-        // 3 is sand
-        // 4 is empty
-
-        //Calculate grid size
-        Level.gridWidth = windowGridWidth / cellWidth;
-        Level.gridHeight = windowGridHeight / cellHeight;
-
-        //Generate terrain and life layer
-        for (int i = 0; i < Level.gridWidth; i++) {
-            cells.add(new ArrayList<>());
-            cellUpdateStatus.add(new ArrayList<>());
-            LifeLayer.life.add(new ArrayList<>());
-            LifeLayer.lifeUpdateStatus.add(new ArrayList<>());
-            for (int j = 0; j < Level.gridHeight; j++) {
-                cells.get(i).add(4);
-                cellUpdateStatus.get(i).add(false);
-                LifeLayer.life.get(i).add(0);
-                LifeLayer.lifeUpdateStatus.get(i).add(false);
-            }
-        }
-    }
     public static int getCell(int x, int y) {
         //Returns an integer indicating the type of cell present
         return (cells.get(x).get(y));
@@ -54,6 +30,73 @@ public class Terrain {
         for (int i = 0; i < Level.gridWidth; i++) {
             for (int j = 0; j < Level.gridHeight; j++) {
                 cellUpdateStatus.get(i).set(j, false);
+            }
+        }
+    }
+
+    public static void generate(int windowGridWidth, int windowGridHeight, int cellWidth, int cellHeight) {
+
+        Level.gridWidth = windowGridWidth / cellWidth;
+        Level.gridHeight = windowGridHeight / cellHeight;
+        //Generate height map
+        //Formula to convert scale into grid size is 2^n + 1
+        heightMap = HeightMap.generate(9, 500, 0, 100);
+        //Generate terrain and life layer
+        for (int i = 0; i < Level.gridWidth; i++) {
+            cells.add(new ArrayList<>());
+            cellUpdateStatus.add(new ArrayList<>());
+            LifeLayer.life.add(new ArrayList<>());
+            LifeLayer.lifeUpdateStatus.add(new ArrayList<>());
+            for (int j = 0; j < Level.gridHeight; j++) {
+                //Ocean
+                //Ocean
+                if (heightMap[i][j] < 20) {
+                    cells.get(i).add(0);
+                }
+                else if(heightMap[i][i] < 30) {
+                    cells.get(i).add(6);
+                }
+                else if(heightMap[i][j] < 60) {
+                    cells.get(i).add(2);
+                }
+                else if(heightMap[i][j] < 80) {
+                    cells.get(i).add(12);
+                }
+                else if(heightMap[i][i] < 200){
+                    cells.get(i).add(7);
+                }
+                else {
+                    cells.get(i).add(8);
+                    System.out.println(heightMap[i][j]);
+                }
+                cellUpdateStatus.get(i).add(false);
+                LifeLayer.life.get(i).add(0);
+                LifeLayer.lifeUpdateStatus.get(i).add(false);
+            }
+        }
+    }
+    public static void regenerate(int scale, int roughness, int minHeight, int maxHeight) {
+        heightMap = HeightMap.generate(scale, roughness, minHeight, maxHeight);
+        int heightMapNum;
+        for (int j = 0; j < Level.gridWidth; j++) {
+            for (int i = 0; i < Level.gridHeight; i++) {
+                heightMapNum = heightMap[i][j];
+                if (heightMapNum < 20) {
+                    cells.get(i).set(j, 0);
+                } else if (heightMapNum < 30) {
+                    cells.get(i).set(j, 6);
+                } else if (heightMapNum < 60) {
+                    cells.get(i).set(j, 2);
+                } else if (heightMapNum < 80) {
+                    cells.get(i).set(j, 12);
+                } else if (heightMapNum < 200) {
+                    cells.get(i).set(j, 7);
+                } else {
+                    cells.get(i).set(j, 7);
+                }
+                cellUpdateStatus.get(i).set(j, false);
+                LifeLayer.life.get(i).set(j, 0);
+                LifeLayer.lifeUpdateStatus.get(i).set(j, false);
             }
         }
     }

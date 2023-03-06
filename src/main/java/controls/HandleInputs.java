@@ -6,6 +6,7 @@ import Level.UI.Ui;
 import Level.Paint;
 import com.raylib.Raylib;
 import Level.LifeLayer;
+import Level.Terrain;
 
 import static com.raylib.Raylib.*;
 
@@ -13,6 +14,7 @@ public class HandleInputs {
     public static void mainInputCheck() {
         //Mouse button
         if (!Player.lifeMode) {
+            //Cell mode
             if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
                 if (!(GetMouseX() > Level.windowGridWidth)) {
                     Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
@@ -34,15 +36,18 @@ public class HandleInputs {
             }
         }
         else {
+            //Life mode
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                //Draw life
                 if (!(GetMouseX() > Level.windowGridWidth)) {
                     Raylib.Vector2 screenToWorldPos = Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Player.camera);
                     int[] coords = Level.getGridPos(Math.round(screenToWorldPos.x()), Math.round(screenToWorldPos.y()));
                     if (LifeLayer.checkLifeExists(coords[0], coords[1])) {
-                        LifeLayer.setLife(coords[0], coords[1], 1);
+                        LifeLayer.setLife(coords[0], coords[1], Player.placementLifeType);
                     }
                 }
                 else {
+                    //Select life
                     for (int i = 0; i < Ui.properties.lifeSelectButtons.length; i++) {
                         if (CheckCollisionPointRec(GetMousePosition(), Ui.properties.lifeSelectButtons[i].rectangle)) {
                             Player.setPlacementLifeType(Ui.properties.lifeSelectButtons[i].lifeType);
@@ -75,6 +80,23 @@ public class HandleInputs {
         //Toggle life mode
         if (IsKeyPressed(KEY_L)) {
             Player.lifeMode = !Player.lifeMode;
+        }
+        //reset camera
+        if (IsKeyPressed(KEY_R)) {
+            Player.resetCamera();
+        }
+        //regen world
+        if (IsKeyPressed(KEY_G)) {
+            Terrain.regenerate(9, Player.roughness, 0, 100);
+        }
+        if (IsKeyDown(KEY_N)) {
+            Player.roughness = Player.roughness - 1;
+            if (Player.roughness <= 0) {
+                Player.roughness = 1;
+            }
+        }
+        if (IsKeyDown(KEY_M)) {
+            Player.roughness = Player.roughness + 1;
         }
     }
 }

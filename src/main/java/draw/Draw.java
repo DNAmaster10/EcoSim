@@ -130,9 +130,16 @@ public class Draw {
                         destRect.x(Level.cellWidth * x).y(Level.cellHeight * y - 4).width(Level.cellWidth + 4).height(Level.cellHeight + 5);
                         Jaylib.DrawTexturePro(BurntOakTree.properties.texture, BurntOakTree.properties.textureRectangle, destRect, textureVector, -1f, WHITE);
                         break;
+                    case 10:
+                        //Bluebell
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(Bluebell.properties.texture, Bluebell.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
+                        break;
                 }
             }
         }
+        //destRect.x(100).y(100).width(100).height(100);
+        //Jaylib.DrawTexturePro(Bluebell.properties.texture, Bluebell.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
     }
     public static void drawGridUi() {
         //Draw placement rectangle below mouse. This is drawn inline with the grid.
@@ -145,7 +152,7 @@ public class Draw {
     }
     public static void drawOverlayUi() {
         DrawFPS(10, 10);
-        Raylib.DrawText("LifeLayer: " + Player.lifeMode, 30, 30, 30, WHITE);
+        Jaylib.DrawText("Roughness: " + Player.roughness, 30, 30, 30, WHITE);
         //Draw placement menu
         //Draw scroll
 
