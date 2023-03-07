@@ -14,6 +14,7 @@ public class Paint {
             case 8:
             case 9:
             case 11:
+            case 13:
                 drawRectangleTerrain(x, y, size, cellType);
                 break;
             case 5: {

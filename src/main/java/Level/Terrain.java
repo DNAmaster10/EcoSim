@@ -49,7 +49,6 @@ public class Terrain {
             LifeLayer.lifeUpdateStatus.add(new ArrayList<>());
             for (int j = 0; j < Level.gridHeight; j++) {
                 //Ocean
-                //Ocean
                 if (heightMap[i][j] < 20) {
                     cells.get(i).add(0);
                 }
@@ -66,7 +65,7 @@ public class Terrain {
                     cells.get(i).add(7);
                 }
                 else {
-                    cells.get(i).add(8);
+                    cells.get(i).add(13);
                     System.out.println(heightMap[i][j]);
                 }
                 cellUpdateStatus.get(i).add(false);
@@ -86,14 +85,17 @@ public class Terrain {
                     cells.get(i).set(j, 0);
                 } else if (heightMapNum < variationDifference * 2) {
                     cells.get(i).set(j, 6);
-                } else if (heightMapNum < variationDifference * 3) {
-                    cells.get(i).set(j, 2);
                 } else if (heightMapNum < variationDifference * 4) {
-                    cells.get(i).set(j, 12);
+                    cells.get(i).set(j, 2);
                 } else if (heightMapNum < variationDifference * 5) {
+                    cells.get(i).set(j, 12);
+                } else if (heightMapNum < variationDifference * 6) {
                     cells.get(i).set(j, 7);
-                } else {
-                    cells.get(i).set(j, 7);
+                } else if (heightMapNum < variationDifference * 7) {
+                    cells.get(i).set(j, 13);
+                }
+                else {
+                    cells.get(i).set(j, 13);
                 }
                 cellUpdateStatus.get(i).set(j, false);
                 LifeLayer.life.get(i).set(j, 0);
@@ -115,10 +117,13 @@ public class Terrain {
                     cells.get(i).set(j, 2);
                 } else if (heightMapNum < variationDifference * 4) {
                     cells.get(i).set(j, 12);
-                } else if (heightMapNum < variationDifference * 5) {
+                } else if (heightMapNum < variationDifference * 6) {
                     cells.get(i).set(j, 7);
-                } else {
-                    cells.get(i).set(j, 7);
+                } else if (heightMapNum < variationDifference * 7) {
+                    cells.get(i).set(j, 13);
+                }
+                else {
+                    cells.get(i).set(j, 13);
                 }
                 cellUpdateStatus.get(i).set(j, false);
                 LifeLayer.life.get(i).set(j, 0);

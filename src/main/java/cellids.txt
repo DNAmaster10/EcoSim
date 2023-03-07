@@ -21,6 +21,9 @@ DirtGrassFire:           9
 Fire:                    10
 FertileDirt:             11
 FertileDirtGrass:        12
+SnowyPeaks:              13
+RiverSource:             14
+RiverMiddle:             15
 
 //Life
 

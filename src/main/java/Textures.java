@@ -35,6 +35,15 @@ public class Textures {
         //FertileDirtGrass
         FertileDirtGrass.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/FertileDirtGrass.png");
 
+        //Snow peaks
+        SnowyPeaks.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/SnowyPeaks.png");
+
+        //River Source
+        RiverSource.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/RiverSource.png");
+
+        //River Middle
+        RiverMiddle.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/RiverMiddle.png");
+
         //OakSapling
         OakSapling.properties.texture = Jaylib.LoadTexture(System.getProperty("user.dir") + "/resources/OakSapling.png");
 
