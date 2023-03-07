@@ -51,20 +51,15 @@ public class Terrain {
                 //Ocean
                 if (heightMap[i][j] < 20) {
                     cells.get(i).add(0);
-                }
-                else if(heightMap[i][i] < 30) {
+                } else if (heightMap[i][i] < 30) {
                     cells.get(i).add(6);
-                }
-                else if(heightMap[i][j] < 60) {
+                } else if (heightMap[i][j] < 60) {
                     cells.get(i).add(2);
-                }
-                else if(heightMap[i][j] < 80) {
+                } else if (heightMap[i][j] < 80) {
                     cells.get(i).add(12);
-                }
-                else if(heightMap[i][i] < 200){
+                } else if (heightMap[i][i] < 200){
                     cells.get(i).add(7);
-                }
-                else {
+                } else {
                     cells.get(i).add(13);
                     System.out.println(heightMap[i][j]);
                 }
@@ -115,11 +110,11 @@ public class Terrain {
                     cells.get(i).set(j, 6);
                 } else if (heightMapNum < variationDifference * 3) {
                     cells.get(i).set(j, 2);
-                } else if (heightMapNum < variationDifference * 4) {
+                } else if (heightMapNum < variationDifference * 5) {
                     cells.get(i).set(j, 12);
                 } else if (heightMapNum < variationDifference * 6) {
                     cells.get(i).set(j, 7);
-                } else if (heightMapNum < variationDifference * 7) {
+                } else if (heightMapNum < variationDifference * 20) {
                     cells.get(i).set(j, 13);
                 }
                 else {

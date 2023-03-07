@@ -17,6 +17,7 @@ public class RiverMiddle {
 
     }
     public static void tickThisCell(int x, int y) {
-
+        int t = 1;
+        if ()
     }
 }

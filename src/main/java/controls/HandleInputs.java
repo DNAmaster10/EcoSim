@@ -88,7 +88,7 @@ public class HandleInputs {
         }
         //regen world
         if (IsKeyPressed(KEY_G)) {
-            Terrain.regenerate(9, Player.roughness, 0, 100);
+            Terrain.regenerate(10, Player.roughness, 0, 100);
         }
 
         if (IsKeyDown(KEY_N)) {

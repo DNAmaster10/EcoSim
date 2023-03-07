@@ -89,6 +89,11 @@ public class Draw {
                         destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
                         Jaylib.DrawTexturePro(RiverSource.properties.texture, RiverSource.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
                         break;
+                    case 15:
+                        //River middle
+                        destRect.x(Level.cellWidth * x).y(Level.cellHeight * y).width(Level.cellWidth).height(Level.cellHeight);
+                        Jaylib.DrawTexturePro(RiverMiddle.properties.texture, RiverMiddle.properties.textureRectangle, destRect, textureVector, 0f, WHITE);
+                        break;
                 }
             }
         }
@@ -163,6 +168,7 @@ public class Draw {
     public static void drawOverlayUi() {
         DrawFPS(10, 10);
         Jaylib.DrawText("Roughness: " + Player.roughness + " Vary: " + Player.variation, 30, 30, 30, WHITE);
+        Jaylib.DrawText("Cell: " + Player.placementCellType, 30, 60, 20, WHITE);
         //Draw placement menu
         //Draw scroll
 
