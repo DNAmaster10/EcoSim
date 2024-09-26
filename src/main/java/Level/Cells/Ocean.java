@@ -1,38 +1,56 @@
 package Level.Cells;
 
-import Level.Level;
 import Level.Terrain;
 import com.raylib.Jaylib;
+import com.raylib.Raylib;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import static java.lang.System.exit;
-
 public class Ocean {
     public static class properties {
-        private static int erosionRate = 10;
-        private static int erosionRateMax = 1000;
-        private static int erosionRateMin = 0;
-        private static int floodRate = 100;
-        private static int floodRateMin = 0;
-        private static int floodRateMax = 1000;
+        private static final int erosionRate = 10;
+        private static final int erosionRateMax = 1000;
+        private static final int erosionRateMin = 0;
+        private static final int floodRate = 100;
+        private static final int floodRateMin = 0;
+        private static final int floodRateMax = 1000;
         public static Jaylib.Color color = new Jaylib.Color(15, 78, 150, 255);
+        public static Raylib.Texture texture;
+        public static Raylib.Rectangle textureRectangle = new Jaylib.Rectangle(0, 0, 10, 10);
+        //An integer which increments each frame
+        public static int frameIncrement = 0;
+        //An integer indicating the current frame the animation is on
+        //(Note that this includes 0)
+        public static int currentAnimationFrame = 0;
+        //An integer indicating the maximum amount of frames this animation can go up to
+        //(Note that this includes 0)
+        public static int maxFrames = 4;
+        //An integer indicating the speed of the animation. Higher is slower
+        public static int animationSpeed = 15;
+    }
+    public static void tickFrame() {
+        properties.currentAnimationFrame += 1;
+        if (properties.currentAnimationFrame > properties.maxFrames) {
+            properties.currentAnimationFrame = 0;
+        }
+        properties.textureRectangle.y(properties.currentAnimationFrame * 10);
+        properties.frameIncrement = 0;
     }
     public static void tickCell(int x, int y) {
         //Check above
-        if (Terrain.checkCellExists(x, y - 1) && !(Terrain.getUpdateStatus(x, y - 1))) {
+        if (Terrain.checkCell(x, y - 1) && !(Terrain.getUpdateStatus(x, y - 1))) {
             tickBorderCell(x, y - 1);
         }
         //Check to right
-        if (Terrain.checkCellExists(x + 1, y) && !(Terrain.getUpdateStatus(x + 1, y))) {
+        if (Terrain.checkCell(x + 1, y) && !(Terrain.getUpdateStatus(x + 1, y))) {
             tickBorderCell(x + 1, y);
         }
         //Check below
-        if (Terrain.checkCellExists(x, y + 1) && !(Terrain.getUpdateStatus(x, y + 1))) {
+        if (Terrain.checkCell(x, y + 1) && !(Terrain.getUpdateStatus(x, y + 1))) {
             tickBorderCell(x, y + 1);
         }
         //Check to left
-        if (Terrain.checkCellExists(x - 1, y) && !(Terrain.getUpdateStatus(x - 1, y))) {
+        if (Terrain.checkCell(x - 1, y) && !(Terrain.getUpdateStatus(x - 1, y))) {
             tickBorderCell(x - 1, y);
         }
     }
@@ -51,13 +69,51 @@ public class Ocean {
                     }
                     break;
                 case 2:
-
+                    if (properties.erosionRate != properties.erosionRateMin && DirtGrass.properties.erosionResistance != DirtGrass.properties.erosionResistanceMax) {
+                        int chance = ThreadLocalRandom.current().nextInt(properties.erosionRateMin, properties.erosionRateMax + 1);
+                        if (chance <= properties.erosionRate) {
+                            chance = ThreadLocalRandom.current().nextInt(DirtGrass.properties.erosionResistanceMin, DirtGrass.properties.erosionResistanceMax + 1);
+                            if (chance >= DirtGrass.properties.erosionResistance) {
+                                Terrain.setCell(x, y, 3);
+                            }
+                        }
+                    }
+                    break;
+                case 3:
+                    if (properties.erosionRate != properties.erosionRateMin) {
+                        int chance = ThreadLocalRandom.current().nextInt(properties.erosionRateMin, properties.erosionRateMax + 1);
+                        if (chance <= properties.erosionRate) {
+                            Terrain.setCell(x, y, 6);
+                        }
+                    }
                     break;
                 case 4:
                     if (properties.floodRate != properties.floodRateMin) {
                         int chance = ThreadLocalRandom.current().nextInt(properties.floodRateMin, properties.floodRateMax + 1);
                         if (chance <= properties.floodRate) {
                             Terrain.setCell(x, y, 0);
+                        }
+                    }
+                    break;
+                case 11:
+                    if (properties.erosionRate != properties.erosionRateMin && FertileDirt.properties.erosionResistance != FertileDirt.properties.erosionResistanceMax) {
+                        int chance = ThreadLocalRandom.current().nextInt(properties.erosionRateMin, properties.erosionRateMax + 1);
+                        if (chance <= properties.erosionRate) {
+                            chance = ThreadLocalRandom.current().nextInt(FertileDirt.properties.erosionResistanceMin, FertileDirt.properties.erosionResistanceMax + 1);
+                            if (chance >= FertileDirt.properties.erosionResistance) {
+                                Terrain.setCell(x, y, 3);
+                            }
+                        }
+                    }
+                    break;
+                case 12:
+                    if (properties.erosionRate != properties.erosionRateMin && FertileDirtGrass.properties.erosionResistance != FertileDirtGrass.properties.erosionResistanceMax) {
+                        int chance = ThreadLocalRandom.current().nextInt(properties.erosionRateMin, properties.erosionRateMax + 1);
+                        if (chance <= properties.erosionRate) {
+                            chance = ThreadLocalRandom.current().nextInt(FertileDirtGrass.properties.erosionResistanceMin, FertileDirtGrass.properties.erosionResistanceMax + 1);
+                            if (chance >= FertileDirtGrass.properties.erosionResistanceMin) {
+                                Terrain.setCell(x, y, 3);
+                            }
                         }
                     }
                     break;

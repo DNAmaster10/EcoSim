@@ -4,41 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Terrain {
-    public static List<List<Integer>> cells = new ArrayList<List<Integer>>();
-    public static List<List<Boolean>> cellUpdateStatus = new ArrayList<List<Boolean>>();
+    public static List<List<Integer>> cells = new ArrayList<>();
+    public static List<List<Boolean>> cellUpdateStatus = new ArrayList<>();
+    public static int[][] heightMap;
 
-    public static void generate(int windowWidth, int windowHeight, int cellWidth, int cellHeight) {
-        // 0 is water
-        // 1 is land
-        // 2 is grass
-        // 3 is sand
-        // 4 is empty
-
-        //Calculate grid size
-        Level.gridWidth = windowWidth / cellWidth;
-        Level.gridHeight = windowHeight / cellHeight;
-
-        //Generate terrain
-        for (int i = 0; i < Level.gridWidth; i++) {
-            cells.add(new ArrayList<Integer>());
-            cellUpdateStatus.add(new ArrayList<Boolean>());
-            for (int j = 0; j < Level.gridHeight; j++) {
-                cells.get(i).add(4);
-                cellUpdateStatus.get(i).add(false);
-            }
-        }
-    }
     public static int getCell(int x, int y) {
         //Returns an integer indicating the type of cell present
         return (cells.get(x).get(y));
     }
+    public static boolean checkCell(int x, int y) {
+        //returns a boolean indicating whether or not a cell exists (i.e not outside the grid)
+        return(y > 0 && (y < Level.gridHeight - 1) && x > 0 && x < Level.gridWidth - 1);
+    }
     public static boolean getUpdateStatus(int x, int y) {
         //Returns a boolean indicating whether the given cell has already been updated in the current tick
         return (cellUpdateStatus.get(x).get(y));
-    }
-    public static boolean checkCellExists(int x, int y) {
-        //Returns a boolean indicating whether the given cell exists (For example, if x is below 0, then it's outside the grid and doesn't exist)
-        return (!(x < 0) && !(x > Level.gridWidth - 1) && !(y < 0) && !(y > Level.gridHeight - 1));
     }
     public static void setCell(int x, int y, int cellType) {
         //Sets a cell at a given grid location
@@ -54,16 +34,95 @@ public class Terrain {
         }
     }
 
-    public static void drawRectangleTerrain(int x, int y, int cellType, int size) {
-        //First calculate the top left corner of the rectangle
-        int[] topLeft = new int[2];
-        topLeft[0] = x - size;
-        topLeft[1] = y - size;
-        for (int currentX = 0; currentX < (size * 2) + 1; currentX++) {
-            for (int currentY = 0; currentY < (size * 2) + 1; currentY++) {
-                if (checkCellExists(topLeft[0] + currentX, topLeft[1] + currentY)) {
-                    setCell(topLeft[0] + currentX, topLeft[1] + currentY, cellType);
+    public static void generate(int windowGridWidth, int windowGridHeight, int cellWidth, int cellHeight) {
+
+        Level.gridWidth = windowGridWidth / cellWidth;
+        Level.gridHeight = windowGridHeight / cellHeight;
+        //Generate height map
+        //Formula to convert scale into grid size is 2^n + 1
+        heightMap = HeightMap.generate(9, 500, 0, 100);
+        //Generate terrain and life layer
+        for (int i = 0; i < Level.gridWidth; i++) {
+            cells.add(new ArrayList<>());
+            cellUpdateStatus.add(new ArrayList<>());
+            LifeLayer.life.add(new ArrayList<>());
+            LifeLayer.lifeUpdateStatus.add(new ArrayList<>());
+            for (int j = 0; j < Level.gridHeight; j++) {
+                //Ocean
+                if (heightMap[i][j] < 20) {
+                    cells.get(i).add(0);
+                } else if (heightMap[i][i] < 30) {
+                    cells.get(i).add(6);
+                } else if (heightMap[i][j] < 60) {
+                    cells.get(i).add(2);
+                } else if (heightMap[i][j] < 80) {
+                    cells.get(i).add(12);
+                } else if (heightMap[i][i] < 200){
+                    cells.get(i).add(7);
+                } else {
+                    cells.get(i).add(13);
+                    System.out.println(heightMap[i][j]);
                 }
+                cellUpdateStatus.get(i).add(false);
+                LifeLayer.life.get(i).add(0);
+                LifeLayer.lifeUpdateStatus.get(i).add(false);
+            }
+        }
+    }
+    public static void regenerate(int scale, int roughness, int minHeight, int maxHeight) {
+        heightMap = HeightMap.generate(scale, roughness, minHeight, maxHeight);
+        int heightMapNum;
+        int variationDifference = Player.variation / 5;
+        for (int j = 0; j < Level.gridWidth; j++) {
+            for (int i = 0; i < Level.gridHeight; i++) {
+                heightMapNum = heightMap[i][j];
+                if (heightMapNum < variationDifference) {
+                    cells.get(i).set(j, 0);
+                } else if (heightMapNum < variationDifference * 2) {
+                    cells.get(i).set(j, 6);
+                } else if (heightMapNum < variationDifference * 4) {
+                    cells.get(i).set(j, 2);
+                } else if (heightMapNum < variationDifference * 5) {
+                    cells.get(i).set(j, 12);
+                } else if (heightMapNum < variationDifference * 6) {
+                    cells.get(i).set(j, 7);
+                } else if (heightMapNum < variationDifference * 7) {
+                    cells.get(i).set(j, 13);
+                }
+                else {
+                    cells.get(i).set(j, 13);
+                }
+                cellUpdateStatus.get(i).set(j, false);
+                LifeLayer.life.get(i).set(j, 0);
+                LifeLayer.lifeUpdateStatus.get(i).set(j, false);
+            }
+        }
+    }
+    public static void reGenerateVariation() {
+        int variationDifference = Player.variation / 5;
+        int heightMapNum;
+        for (int j = 0; j < Level.gridWidth; j++) {
+            for (int i = 0; i < Level.gridHeight; i++) {
+                heightMapNum = heightMap[i][j];
+                if (heightMapNum < variationDifference) {
+                    cells.get(i).set(j, 0);
+                } else if (heightMapNum < variationDifference * 2) {
+                    cells.get(i).set(j, 6);
+                } else if (heightMapNum < variationDifference * 3) {
+                    cells.get(i).set(j, 2);
+                } else if (heightMapNum < variationDifference * 5) {
+                    cells.get(i).set(j, 12);
+                } else if (heightMapNum < variationDifference * 6) {
+                    cells.get(i).set(j, 7);
+                } else if (heightMapNum < variationDifference * 20) {
+                    cells.get(i).set(j, 13);
+                }
+                else {
+                    cells.get(i).set(j, 13);
+                }
+                cellUpdateStatus.get(i).set(j, false);
+                LifeLayer.life.get(i).set(j, 0);
+                LifeLayer.lifeUpdateStatus.get(i).set(j, false);
             }
         }
     }
